@@ -1,0 +1,9 @@
+{
+  "name": "globe-guess-languages",
+  "main": "dist/server/server.js",
+  "compatibility_date": "2026-06-07",
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS"
+  }
+}
