@@ -79,6 +79,16 @@
 .diff-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.18rem; }
 .diff-tag { font-size: .56rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 4px 8px; border-radius: var(--radius-pill); background: rgba(255,255,255,.08); color: var(--ink-dim); }
 .diff-desc { font-size: .82rem; color: var(--ink-dim); line-height: 1.45; }
+.diff-footer { display: none; }
+.diff-meta { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 6px; min-width: 110px; padding: 0; background: transparent; border: none; border-radius: 0; }
+.diff-meta-label { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-dim); font-weight: 700; }
+.diff-meta-value { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.35rem; }
+.diff-select-btn[data-diff="easy"] .diff-meta-value { color: #34d399; }
+.diff-select-btn[data-diff="medium"] .diff-meta-value { color: #7c5cff; }
+.diff-select-btn[data-diff="hard"] .diff-meta-value { color: #fbbf24; }
+.diff-select-btn[data-diff="expert"] .diff-meta-value { color: #ff5d7a; }
+.diff-meta-subtext { font-size: .75rem; color: var(--ink-dim); }
+.diff-arrow { margin-left: auto; font-size: 1.6rem; color: var(--ink-dim); }
 
 /* ── Game nav & scoreboard ── */
 .game-nav { display: flex; justify-content: flex-start; }

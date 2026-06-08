@@ -77,6 +77,8 @@ export function pickDistractors(correctId: string, eligibleIds: string[], count:
 }
 
 // ── Stats Store ──
+export type DifficultyKey = 'easy' | 'medium' | 'hard' | 'expert';
+
 export interface Stats {
   games: number;
   wins: number;
@@ -84,13 +86,27 @@ export interface Stats {
   wrongTotal: number;
   currentStreak: number;
   bestStreak: number;
+  bestTimeMs: number | null;
+  bestTimeMsByDifficulty: Record<DifficultyKey, number | null>;
+  winsByDifficulty: Record<DifficultyKey, number>;
   langHistory: Record<string, { correct: number; wrong: number }>;
 }
 
 const STATS_KEY = 'lingua_stats_v3';
 
 function defaultStats(): Stats {
-  return { games: 0, wins: 0, correctTotal: 0, wrongTotal: 0, currentStreak: 0, bestStreak: 0, langHistory: {} };
+  return {
+    games: 0,
+    wins: 0,
+    correctTotal: 0,
+    wrongTotal: 0,
+    currentStreak: 0,
+    bestStreak: 0,
+    bestTimeMs: null,
+    bestTimeMsByDifficulty: { easy: null, medium: null, hard: null, expert: null },
+    winsByDifficulty: { easy: 0, medium: 0, hard: 0, expert: 0 },
+    langHistory: {},
+  };
 }
 
 export function loadStats(): Stats {
@@ -108,18 +124,33 @@ export function saveStats(stats: Stats): void {
 
 export function recordGame(
   won: boolean,
+  difficulty: DifficultyKey,
   correctCount: number,
   wrongCount: number,
-  langStats: Record<string, { correct: number; wrong: number }>
-): Stats {
+  langStats: Record<string, { correct: number; wrong: number }>,
+  completionTimeMs?: number
+): { stats: Stats; newPersonalBest: boolean } {
   const s = loadStats();
+  let newPersonalBest = false;
+
   s.games++;
   s.correctTotal += correctCount;
   s.wrongTotal += wrongCount;
   if (won) {
     s.wins++;
+    s.winsByDifficulty[difficulty] = (s.winsByDifficulty[difficulty] ?? 0) + 1;
     s.currentStreak++;
     if (s.currentStreak > s.bestStreak) s.bestStreak = s.currentStreak;
+    if (completionTimeMs !== undefined) {
+      const currentBest = s.bestTimeMsByDifficulty[difficulty];
+      if (currentBest === null || completionTimeMs < currentBest) {
+        s.bestTimeMsByDifficulty[difficulty] = completionTimeMs;
+        newPersonalBest = true;
+      }
+      if (s.bestTimeMs === null || completionTimeMs < s.bestTimeMs) {
+        s.bestTimeMs = completionTimeMs;
+      }
+    }
   } else {
     s.currentStreak = 0;
   }
@@ -129,7 +160,14 @@ export function recordGame(
     s.langHistory[id].wrong += st.wrong;
   }
   saveStats(s);
-  return s;
+  return { stats: s, newPersonalBest };
+}
+
+export function formatElapsedTime(ms: number): string {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 export function getDerivedStats(s: Stats) {

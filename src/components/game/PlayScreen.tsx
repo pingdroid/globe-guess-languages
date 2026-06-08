@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useGame } from '../../stores/game-store';
+import { formatElapsedTime } from '../../engine/game-engine';
 import { getLanguageById } from '../../data/languages';
 
 export function PlayScreen() {
@@ -8,6 +9,21 @@ export function PlayScreen() {
   const inputRef = useRef<HTMLInputElement>(null);
   const cfg = state.cfg!;
   const correctLang = state.currentLangId ? getLanguageById(state.currentLangId) : null;
+  const [timerMs, setTimerMs] = useState(state.finalTimeMs ?? 0);
+
+  useEffect(() => {
+    if (state.phase === 'playing' || state.runStartAt !== null) {
+      const update = () => {
+        if (state.runStartAt !== null) {
+          setTimerMs(Date.now() - state.runStartAt);
+        }
+      };
+      update();
+      const interval = window.setInterval(update, 50);
+      return () => window.clearInterval(interval);
+    }
+    setTimerMs(state.finalTimeMs ?? 0);
+  }, [state.runStartAt, state.phase, state.finalTimeMs]);
 
   useEffect(() => {
     if (state.phase === 'playing' && cfg.inputType === 'text') {
@@ -47,6 +63,7 @@ export function PlayScreen() {
       <div className="scoreboard">
         <div className="score-item"><div className="score-label">Correct</div><div className="score-pips">{correctPips}</div></div>
         <div className="score-item"><div className="score-label">Lives</div><div className="score-pips">{wrongPips}</div></div>
+        <div className="score-item timer-item"><div className="score-label">Time</div><div className="timer-value">{formatElapsedTime(timerMs)}</div></div>
       </div>
 
       <div className="progress-bar">

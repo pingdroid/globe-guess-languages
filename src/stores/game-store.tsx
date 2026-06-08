@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
-import { type DifficultyConfig, DIFFICULTIES, pickLanguage, pickSentence, pickDistractors, isFuzzyMatch, recordGame, loadStats, getDerivedStats } from '../engine/game-engine';
+import { type DifficultyConfig, type DifficultyKey, DIFFICULTIES, pickLanguage, pickSentence, pickDistractors, isFuzzyMatch, recordGame, loadStats, getDerivedStats } from '../engine/game-engine';
 import { getLanguageById, getLanguagesByTiers } from '../data/languages';
 
 // ── Types ──
@@ -7,7 +7,7 @@ type Phase = 'menu' | 'playing' | 'revealed' | 'won' | 'lost';
 
 interface GameState {
   phase: Phase;
-  difficulty: string | null;
+  difficulty: DifficultyKey | null;
   cfg: DifficultyConfig | null;
   correctCount: number;
   wrongCount: number;
@@ -19,10 +19,13 @@ interface GameState {
   recentLangIds: string[];
   recentSentenceKeys: Set<string>;
   langStats: Record<string, { correct: number; wrong: number }>;
+  runStartAt: number | null;
+  finalTimeMs: number | null;
+  newPersonalBest: boolean;
 }
 
 type Action =
-  | { type: 'START_GAME'; difficulty: string }
+  | { type: 'START_GAME'; difficulty: DifficultyKey }
   | { type: 'NEXT_ROUND' }
   | { type: 'GUESS'; guessValue: string; inputMode: 'buttons' | 'text' }
   | { type: 'QUIT' };
@@ -33,6 +36,9 @@ const initialState: GameState = {
   currentLangId: null, currentSentence: '', options: [], hint: '',
   lastGuessCorrect: null,
   recentLangIds: [], recentSentenceKeys: new Set(), langStats: {},
+  runStartAt: null,
+  finalTimeMs: null,
+  newPersonalBest: false,
 };
 
 function setupRound(state: GameState): GameState {
@@ -75,6 +81,9 @@ function reducer(state: GameState, action: Action): GameState {
         difficulty: action.difficulty,
         cfg,
         recentSentenceKeys: new Set(),
+        runStartAt: Date.now(),
+        finalTimeMs: null,
+        newPersonalBest: false,
       };
       return setupRound(fresh);
     }
@@ -96,15 +105,31 @@ function reducer(state: GameState, action: Action): GameState {
       const wrongCount = state.wrongCount + (isCorrect ? 0 : 1);
 
       let phase: Phase = 'revealed';
+      let finalTimeMs: number | null = state.finalTimeMs;
+      let newPersonalBest = false;
+      const completionTimeMs = state.runStartAt ? Date.now() - state.runStartAt : undefined;
       if (correctCount >= cfg.winTarget) {
         phase = 'won';
-        recordGame(true, correctCount, wrongCount, langStats);
+        finalTimeMs = completionTimeMs ?? null;
+        const result = recordGame(true, state.difficulty!, correctCount, wrongCount, langStats, completionTimeMs);
+        newPersonalBest = result.newPersonalBest;
       } else if (wrongCount >= cfg.wrongLimit) {
         phase = 'lost';
-        recordGame(false, correctCount, wrongCount, langStats);
+        finalTimeMs = completionTimeMs ?? null;
+        recordGame(false, state.difficulty!, correctCount, wrongCount, langStats);
       }
 
-      return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats };
+      return {
+        ...state,
+        phase,
+        correctCount,
+        wrongCount,
+        lastGuessCorrect: isCorrect,
+        langStats,
+        runStartAt: phase === 'won' || phase === 'lost' ? null : state.runStartAt,
+        finalTimeMs,
+        newPersonalBest,
+      };
     }
     case 'QUIT':
       return initialState;
