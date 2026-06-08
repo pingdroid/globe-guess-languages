@@ -50,7 +50,7 @@
 }
 
 /* ── Header ── */
-.game-header { text-align: center; padding-top: 6px; }
+.game-header { text-align: center; padding-top: 6px; width: 100%; max-width: 640px; }
 .logo { font-family: 'Fraunces', serif; font-weight: 800; font-size: clamp(2.4rem, 8vw, 3.6rem); letter-spacing: -.04em; background: linear-gradient(180deg, #ffffff 0%, #ecf0ff 45%, #b8c4e6 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 18px rgba(124, 92, 255, 0.35)) drop-shadow(0 0 30px rgba(74, 200, 255, 0.18)); }
 .logo span { font-style: italic; background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .tagline { margin-top: 8px; font-size: .72rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
