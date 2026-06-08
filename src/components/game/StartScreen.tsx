@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGame, useStats } from '../../stores/game-store';
 import { formatElapsedTime, type DifficultyKey } from '../../engine/game-engine';
+import { HighScoresModal } from './HighScoresModal';
 
 const diffOptions: Array<{ key: DifficultyKey; icon: string; title: string; tag: string; desc: string }> = [
   { key: 'easy', icon: '🌱', title: 'Easy', tag: '5 to win · 3 lives', desc: 'Multiple choice. Common languages. Regional hints on.' },
@@ -14,12 +15,19 @@ export function StartScreen() {
   const stats = useStats();
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showHighScores, setShowHighScores] = useState(false);
 
   return (
     <div className="start-screen">
       <div className="start-intro">
         <h2>Pick a challenge</h2>
         <p>Read a snippet, identify the language. Earn streaks, master tongues, climb tiers.</p>
+      </div>
+
+      <div className="start-high-scores">
+        <button type="button" className="action-btn high-scores-panel-btn" onClick={() => setShowHighScores(true)}>
+          View high scores
+        </button>
       </div>
 
       <div className="start-menu">
@@ -52,6 +60,8 @@ export function StartScreen() {
       <button type="button" className="how-to-play-link" onClick={() => setShowPrivacy(true)}>
         Privacy policy
       </button>
+
+      {showHighScores && <HighScoresModal stats={stats} onClose={() => setShowHighScores(false)} />}
 
       {showHowToPlay && (
         <div className="how-to-play-overlay" role="dialog" aria-modal="true" aria-labelledby="how-to-play-title">

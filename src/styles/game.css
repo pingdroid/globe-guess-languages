@@ -91,17 +91,49 @@
 .diff-arrow { margin-left: auto; font-size: 1.6rem; color: var(--ink-dim); }
 
 .how-to-play-link { display: inline-flex; margin: 16px auto 0; background: transparent; border: none; color: var(--brand); font-size: .95rem; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0; }
+.start-high-scores { display: flex; flex-direction: column; gap: 16px; }
+.high-scores-panel-btn { width: 100%; }
 .how-to-play-overlay { position: fixed; inset: 0; background: rgba(11, 16, 32, 0.93); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; }
-.how-to-play-modal { width: min(100%, 640px); background: rgba(7, 12, 26, 0.97); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); box-shadow: 0 30px 70px rgba(0,0,0,.35); padding: 28px 26px; position: relative; }
-.how-to-play-title { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 6px; }
+.how-to-play-modal, .high-scores-modal { width: min(100%, 640px); background: rgba(7, 12, 26, 0.97); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); box-shadow: 0 30px 70px rgba(0,0,0,.35); padding: 28px 26px; position: relative; }
+.how-to-play-title, .high-scores-title { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 6px; }
 .how-to-play-subtitle { color: var(--ink-dim); font-size: .95rem; margin-bottom: 20px; }
 .how-to-play-step { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.06); }
 .how-to-play-step:first-child { border-top: none; }
 .how-to-play-step-icon { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: rgba(255,255,255,.08); color: #fff; font-size: 1rem; }
 .how-to-play-step-text { margin-top: 4px; color: var(--ink-dim); font-size: .92rem; line-height: 1.5; }
 .privacy-link { color: var(--brand); text-decoration: underline; }
-.how-to-play-close { position: absolute; top: 18px; right: 18px; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(255,255,255,.08); color: var(--ink); font-size: 1.1rem; cursor: pointer; transition: background .2s; }
-.how-to-play-close:hover { background: rgba(255,255,255,.14); }
+.how-to-play-close, .high-scores-close { position: absolute; top: 18px; right: 18px; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(255,255,255,.08); color: var(--ink); font-size: 1.1rem; cursor: pointer; transition: background .2s; }
+.how-to-play-close:hover, .high-scores-close:hover { background: rgba(255,255,255,.14); }
+
+.high-scores-overlay { position: fixed; inset: 0; background: rgba(11, 16, 32, 0.93); z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.high-scores-modal { display: flex; flex-direction: column; gap: 22px; }
+.high-scores-header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+.high-scores-icon { width: 52px; height: 52px; border-radius: 18px; display: grid; place-items: center; background: var(--grad-gold); font-size: 1.4rem; }
+.high-scores-label { font-size: 1.4rem; font-weight: 800; }
+.high-scores-subtitle { color: var(--ink-dim); font-size: .94rem; line-height: 1.5; }
+.high-scores-body { display: flex; flex-direction: column; gap: 18px; }
+.high-scores-section { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; }
+.high-scores-section-title { font-size: .92rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 14px; }
+.high-scores-grid { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 12px; }
+.high-scores-item { display: flex; flex-direction: column; gap: 6px; padding: 12px; background: rgba(255,255,255,.05); border-radius: 14px; }
+.high-scores-item-label { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.high-scores-item-value { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.2rem; }
+.high-scores-section.two-column { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.high-scores-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 32px 16px; text-align: center; }
+.high-scores-empty-icon { width: 72px; height: 72px; border-radius: 24px; display: grid; place-items: center; background: rgba(255,255,255,.08); font-size: 2rem; }
+.high-scores-empty-title { font-size: 1.2rem; font-weight: 700; }
+.high-scores-empty-copy { color: var(--ink-dim); font-size: .95rem; line-height: 1.55; }
+
+.high-scores-runs-list { display: flex; flex-direction: column; gap: 10px; }
+.high-scores-run-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; transition: all .2s; }
+.high-scores-run-item.completed { background: rgba(52,211,153,.15); border-color: rgba(52,211,153,.3); }
+.high-scores-run-item.incomplete { background: rgba(255,255,255,.04); }
+.high-scores-run-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+.high-scores-run-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.08); font-size: 1.2rem; }
+.high-scores-run-meta { display: flex; flex-direction: column; gap: 2px; }
+.high-scores-run-name { font-size: .9rem; font-weight: 700; color: var(--ink); }
+.high-scores-run-score { font-size: .8rem; color: var(--ink-dim); }
+.high-scores-run-time { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.1rem; color: var(--success); }
 
 /* ── Game nav & scoreboard ── */
 .game-nav { display: flex; justify-content: flex-start; }

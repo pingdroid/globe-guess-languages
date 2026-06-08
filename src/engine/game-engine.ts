@@ -88,6 +88,8 @@ export interface Stats {
   bestStreak: number;
   bestTimeMs: number | null;
   bestTimeMsByDifficulty: Record<DifficultyKey, number | null>;
+  bestRunByDifficulty: Record<DifficultyKey, number>;
+  bestRunByDifficultyWon: Record<DifficultyKey, boolean>;
   winsByDifficulty: Record<DifficultyKey, number>;
   langHistory: Record<string, { correct: number; wrong: number }>;
 }
@@ -104,6 +106,8 @@ function defaultStats(): Stats {
     bestStreak: 0,
     bestTimeMs: null,
     bestTimeMsByDifficulty: { easy: null, medium: null, hard: null, expert: null },
+    bestRunByDifficulty: { easy: 0, medium: 0, hard: 0, expert: 0 },
+    bestRunByDifficultyWon: { easy: false, medium: false, hard: false, expert: false },
     winsByDifficulty: { easy: 0, medium: 0, hard: 0, expert: 0 },
     langHistory: {},
   };
@@ -153,6 +157,13 @@ export function recordGame(
     }
   } else {
     s.currentStreak = 0;
+  }
+  if (s.bestRunByDifficulty[difficulty] < correctCount) {
+    s.bestRunByDifficulty[difficulty] = correctCount;
+    s.bestRunByDifficultyWon[difficulty] = won;
+  } else if (s.bestRunByDifficulty[difficulty] === correctCount && won && !s.bestRunByDifficultyWon[difficulty]) {
+    // Update the won flag if we just won with the same best score
+    s.bestRunByDifficultyWon[difficulty] = true;
   }
   for (const [id, st] of Object.entries(langStats)) {
     if (!s.langHistory[id]) s.langHistory[id] = { correct: 0, wrong: 0 };
