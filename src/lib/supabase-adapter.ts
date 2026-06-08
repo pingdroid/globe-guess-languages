@@ -1,5 +1,4 @@
   import { supabase } from './supabase-client';
-  import { setItem as setLocalItem, getItem as getLocalItem } from './stats-adapter';
 
   export async function fetchRemoteStats(userId: string) {
     const { data, error } = await supabase.from('user_stats').select('stats').eq('user_id', userId).maybeSingle();
@@ -15,7 +14,7 @@
   export function makeSupabaseAdapter(userId: string) {
     return {
       getItem: (k: string) => {
-        return getLocalItem(k);
+        try { return localStorage.getItem(k); } catch { return null; }
       },
       setItem: (k: string, v: string) => {
         try { localStorage.setItem(k, v); } catch {}
@@ -34,6 +33,6 @@
           })();
         }, 0);
       },
-      removeItem: (k: string) => { try { localStorage.setItem(k, ''); } catch {} }
+      removeItem: (k: string) => { try { localStorage.removeItem(k); } catch {} }
     };
   }
