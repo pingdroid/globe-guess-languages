@@ -127,7 +127,7 @@ function reducer(state: GameState, action: Action): GameState {
         wrongCount,
         lastGuessCorrect: isCorrect,
         langStats,
-        runStartAt: phase === 'won' || phase === 'lost' ? null : state.runStartAt,
+        runStartAt: phase === 'won' || phase === 'final-loss-revealed' ? null : state.runStartAt,
         finalTimeMs,
         newPersonalBest,
       };
