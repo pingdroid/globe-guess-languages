@@ -10,6 +10,7 @@ export function PlayScreen() {
   const cfg = state.cfg!;
   const correctLang = state.currentLangId ? getLanguageById(state.currentLangId) : null;
   const [timerMs, setTimerMs] = useState(state.finalTimeMs ?? 0);
+  const [countdownSeconds, setCountdownSeconds] = useState(10);
 
   useEffect(() => {
     if (state.phase === 'playing' || state.runStartAt !== null) {
@@ -31,6 +32,22 @@ export function PlayScreen() {
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [state.currentSentence, state.phase]);
+
+  useEffect(() => {
+    if (state.phase === 'final-loss-revealed') {
+      setCountdownSeconds(10);
+      const interval = window.setInterval(() => {
+        setCountdownSeconds(prev => {
+          if (prev <= 1) {
+            dispatch({ type: 'LOSS_TIMEOUT' });
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => window.clearInterval(interval);
+    }
+  }, [state.phase, dispatch]);
 
   const handleButtonGuess = (langId: string) => {
     if (state.phase !== 'playing') return;
@@ -104,7 +121,7 @@ export function PlayScreen() {
       )}
 
       {/* Revealed state */}
-      {state.phase === 'revealed' && (
+      {(state.phase === 'revealed' || state.phase === 'final-loss-revealed') && (
         <>
           {cfg.inputType === 'buttons' && (
             <div className="options-grid">
@@ -140,7 +157,17 @@ export function PlayScreen() {
             </div>
           )}
 
-          <button className="action-btn visible" onClick={handleNext}>Next Sentence →</button>
+          {state.phase === 'revealed' && (
+            <button className="action-btn visible" onClick={handleNext}>Next Sentence →</button>
+          )}
+
+          {state.phase === 'final-loss-revealed' && (
+            <div className="final-loss-countdown">
+              <button className="skip-countdown-btn" onClick={() => dispatch({ type: 'LOSS_TIMEOUT' })}>Skip →</button>
+              <div className="countdown-message">Redirecting to game over screen in...</div>
+              <div className="countdown-timer">{countdownSeconds}s</div>
+            </div>
+          )}
         </>
       )}
     </div>

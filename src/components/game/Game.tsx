@@ -34,6 +34,7 @@ function GameRouter() {
       return <StartScreen />;
     case 'playing':
     case 'revealed':
+    case 'final-loss-revealed':
       return <PlayScreen />;
     case 'won':
     case 'lost':

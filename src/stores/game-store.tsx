@@ -3,7 +3,7 @@ import { type DifficultyConfig, type DifficultyKey, DIFFICULTIES, pickLanguage, 
 import { getLanguageById, getLanguagesByTiers } from '../data/languages';
 
 // ── Types ──
-type Phase = 'menu' | 'playing' | 'revealed' | 'won' | 'lost';
+type Phase = 'menu' | 'playing' | 'revealed' | 'final-loss-revealed' | 'won' | 'lost';
 
 interface GameState {
   phase: Phase;
@@ -28,6 +28,7 @@ type Action =
   | { type: 'START_GAME'; difficulty: DifficultyKey }
   | { type: 'NEXT_ROUND' }
   | { type: 'GUESS'; guessValue: string; inputMode: 'buttons' | 'text' }
+  | { type: 'LOSS_TIMEOUT' }
   | { type: 'QUIT' };
 
 const initialState: GameState = {
@@ -114,7 +115,7 @@ function reducer(state: GameState, action: Action): GameState {
         const result = recordGame(true, state.difficulty!, correctCount, wrongCount, langStats, completionTimeMs);
         newPersonalBest = result.newPersonalBest;
       } else if (wrongCount >= cfg.wrongLimit) {
-        phase = 'lost';
+        phase = 'final-loss-revealed';
         finalTimeMs = completionTimeMs ?? null;
         recordGame(false, state.difficulty!, correctCount, wrongCount, langStats);
       }
@@ -133,6 +134,8 @@ function reducer(state: GameState, action: Action): GameState {
     }
     case 'QUIT':
       return initialState;
+    case 'LOSS_TIMEOUT':
+      return state.phase === 'final-loss-revealed' ? { ...state, phase: 'lost' } : state;
     default:
       return state;
   }
