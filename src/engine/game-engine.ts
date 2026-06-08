@@ -1,4 +1,5 @@
 import { type Language, getLanguageById, getLanguagesByTiers } from '../data/languages';
+import { getItem, setItem, removeItem } from '../lib/stats-adapter';
 
 // ── Difficulty Configuration ──
 export interface DifficultyConfig {
@@ -116,7 +117,7 @@ function defaultStats(): Stats {
 
 export function loadStats(): Stats {
   try {
-    const raw = localStorage.getItem(STATS_KEY) ?? localStorage.getItem(LEGACY_STATS_KEY);
+    const raw = getItem(STATS_KEY) ?? getItem(LEGACY_STATS_KEY);
     return raw ? { ...defaultStats(), ...JSON.parse(raw) } : defaultStats();
   } catch {
     return defaultStats();
@@ -125,8 +126,8 @@ export function loadStats(): Stats {
 
 export function saveStats(stats: Stats): void {
   try {
-    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-    localStorage.removeItem(LEGACY_STATS_KEY);
+    setItem(STATS_KEY, JSON.stringify(stats));
+    removeItem(LEGACY_STATS_KEY);
   } catch {}
 }
 

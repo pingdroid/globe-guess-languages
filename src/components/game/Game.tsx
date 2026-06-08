@@ -1,4 +1,8 @@
 import { GameProvider, useGame, useStats } from '../../stores/game-store';
+import AuthModal from '../auth/AuthModal';
+import ProfileMenu from '../auth/ProfileMenu';
+import { useState } from 'react';
+import { useUser } from '../../stores/user-store';
 import { StartScreen } from './StartScreen';
 import { PlayScreen } from './PlayScreen';
 import { EndScreen } from './EndScreen';
@@ -18,10 +22,16 @@ function StatsBar() {
 
 function Header() {
   const { dispatch } = useGame();
+  const { initialized } = useUser();
   return (
-    <header className="game-header">
-      <h1 className="logo" onClick={() => dispatch({ type: 'QUIT' })}>Languess</h1>
-      <p className="tagline">Guess the language</p>
+    <header className="game-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <h1 className="logo" onClick={() => dispatch({ type: 'QUIT' })}>Languess</h1>
+        <p className="tagline">Guess the language</p>
+      </div>
+      <div style={{ opacity: initialized ? 1 : 0, transition: 'opacity 240ms ease' }}>
+        <ProfileMenu />
+      </div>
     </header>
   );
 }
@@ -43,9 +53,11 @@ function GameRouter() {
 }
 
 export function Game() {
+  const [showAuthModal, setShowAuthModal] = useState(true);
   return (
     <GameProvider>
       <div className="game-wrapper">
+        {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
         <Header />
         <StatsBar />
         <GameRouter />
