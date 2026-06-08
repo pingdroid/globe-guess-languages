@@ -94,7 +94,8 @@ export interface Stats {
   langHistory: Record<string, { correct: number; wrong: number }>;
 }
 
-const STATS_KEY = 'lingua_stats_v3';
+const STATS_KEY = 'languess_stats_v1';
+const LEGACY_STATS_KEY = 'lingua_stats_v3';
 
 function defaultStats(): Stats {
   return {
@@ -115,7 +116,7 @@ function defaultStats(): Stats {
 
 export function loadStats(): Stats {
   try {
-    const raw = localStorage.getItem(STATS_KEY);
+    const raw = localStorage.getItem(STATS_KEY) ?? localStorage.getItem(LEGACY_STATS_KEY);
     return raw ? { ...defaultStats(), ...JSON.parse(raw) } : defaultStats();
   } catch {
     return defaultStats();
@@ -123,7 +124,10 @@ export function loadStats(): Stats {
 }
 
 export function saveStats(stats: Stats): void {
-  try { localStorage.setItem(STATS_KEY, JSON.stringify(stats)); } catch {}
+  try {
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+    localStorage.removeItem(LEGACY_STATS_KEY);
+  } catch {}
 }
 
 export function recordGame(

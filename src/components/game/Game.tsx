@@ -20,7 +20,7 @@ function Header() {
   const { dispatch } = useGame();
   return (
     <header className="game-header">
-      <h1 className="logo" onClick={() => dispatch({ type: 'QUIT' })}>Lin<span>g</span>ua</h1>
+      <h1 className="logo" onClick={() => dispatch({ type: 'QUIT' })}>Languess</h1>
       <p className="tagline">Guess the language</p>
     </header>
   );
