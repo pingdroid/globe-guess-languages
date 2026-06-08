@@ -10,7 +10,7 @@ export function PlayScreen() {
   const cfg = state.cfg!;
   const correctLang = state.currentLangId ? getLanguageById(state.currentLangId) : null;
   const [timerMs, setTimerMs] = useState(state.finalTimeMs ?? 0);
-  const [countdownSeconds, setCountdownSeconds] = useState(10);
+  const [countdownSeconds, setCountdownSeconds] = useState(30);
 
   useEffect(() => {
     if (state.phase === 'playing' || state.runStartAt !== null) {
@@ -35,7 +35,7 @@ export function PlayScreen() {
 
   useEffect(() => {
     if (state.phase === 'final-loss-revealed') {
-      setCountdownSeconds(10);
+      setCountdownSeconds(30);
       const interval = window.setInterval(() => {
         setCountdownSeconds(prev => {
           if (prev <= 1) {
