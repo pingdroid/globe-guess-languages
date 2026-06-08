@@ -24,12 +24,12 @@ function Header() {
   const { dispatch } = useGame();
   const { initialized } = useUser();
   return (
-    <header className="game-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+    <header className="game-header">
+      <div>
         <h1 className="logo" onClick={() => dispatch({ type: 'QUIT' })}>Languess</h1>
         <p className="tagline">Guess the language</p>
       </div>
-      <div style={{ opacity: initialized ? 1 : 0, transition: 'opacity 240ms ease' }}>
+      <div className="profile-anchor" style={{ opacity: initialized ? 1 : 0, transition: 'opacity 240ms ease' }}>
         <ProfileMenu />
       </div>
     </header>

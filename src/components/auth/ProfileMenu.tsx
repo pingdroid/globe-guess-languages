@@ -3,12 +3,7 @@ import { useUser } from '../../stores/user-store';
 
 function Avatar({ email }: { email?: string }) {
   const initial = email ? email.charAt(0).toUpperCase() : '?';
-  return (
-    <div className="avatar-circle" style={{
-      width: 36, height: 36, borderRadius: 18, background: 'linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-foreground)'
-    }}>{initial}</div>
-  );
+  return <div className="profile-avatar">{initial}</div>;
 }
 
 export default function ProfileMenu() {
@@ -26,23 +21,26 @@ export default function ProfileMenu() {
   }, []);
 
   return (
-    <div ref={ref} style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+    <div ref={ref} className="profile-menu-root">
       {isGuest ? (
-        <div className="guest-pill" style={{ padding: '6px 10px', borderRadius: 9999, background: 'rgba(148,163,184,0.12)', color: 'var(--color-muted-foreground)', fontSize: 13 }}>👤 Guest Mode</div>
+        <div className="profile-pill guest-pill">
+          <span className="profile-pill-dot" />
+          <span>Guest Mode</span>
+        </div>
       ) : (
-        <button onClick={() => setOpen(s => !s)} className="profile-btn" style={{ display: 'flex', gap: 8, alignItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer' }}>
+        <button onClick={() => setOpen(s => !s)} className="profile-pill profile-btn">
           <Avatar email={user?.email} />
-          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13 }}>{user?.email}</div>
+          <span className="profile-pill-email">{user?.email}</span>
         </button>
       )}
 
       {open && !isGuest && (
-        <div className="profile-dropdown" style={{ position: 'absolute', right: 0, top: 44, minWidth: 220, background: 'var(--color-card)', borderRadius: 8, boxShadow: '0 6px 18px rgba(0,0,0,0.25)', padding: 12, zIndex: 40, transition: 'opacity 180ms ease' }}>
-          <div style={{ fontSize: 13, color: 'var(--color-muted-foreground)', marginBottom: 8 }}>Signed in as</div>
-          <div style={{ fontSize: 14, color: 'var(--color-foreground)', marginBottom: 12 }}>{user?.email}</div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={async () => { await signOut(); setOpen(false); }} style={{ flex: 1, padding: '8px 10px', borderRadius: 6, background: 'linear-gradient(180deg, var(--color-secondary), var(--color-secondary))', color: 'var(--color-secondary-foreground)', border: 'none', cursor: 'pointer' }}>Log Out</button>
-            <button onClick={() => { playAsGuest(); setOpen(false); }} style={{ padding: '8px 10px', borderRadius: 6, background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-foreground)', cursor: 'pointer' }}>Switch to Guest</button>
+        <div className="profile-dropdown">
+          <div className="profile-dropdown-label">Signed in as</div>
+          <div className="profile-dropdown-email">{user?.email}</div>
+          <div className="profile-dropdown-actions">
+            <button className="profile-dropdown-btn primary" onClick={async () => { await signOut(); setOpen(false); }}>Log Out</button>
+            <button className="profile-dropdown-btn" onClick={() => { playAsGuest(); setOpen(false); }}>Switch to Guest</button>
           </div>
         </div>
       )}

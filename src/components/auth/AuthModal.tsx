@@ -21,16 +21,21 @@ export default function AuthModal({ onClose }: { onClose?: () => void }) {
   }
 
   return (
-    <div className="auth-modal">
-      <h3>{mode === 'signin' ? 'Sign In' : 'Sign Up'}</h3>
-      <form onSubmit={submit}>
-        <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        <button type="submit">{mode === 'signin' ? 'Sign In' : 'Create Account'}</button>
-      </form>
-      <div style={{ marginTop: 8 }}>
-        <button onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}>{mode === 'signin' ? 'Create account' : 'Have an account? Sign in'}</button>
-        <button onClick={() => { playAsGuest(); onClose?.(); }} style={{ marginLeft: 8 }}>Play as Guest</button>
+    <div className="auth-overlay" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="auth-modal" onClick={e => e.stopPropagation()}>
+        <h3 className="auth-modal-title">{mode === 'signin' ? 'Welcome back' : 'Create account'}</h3>
+        <p className="auth-modal-subtitle">{mode === 'signin' ? 'Sign in to sync your progress.' : 'Sign up to save your stats across devices.'}</p>
+        <form onSubmit={submit} className="auth-form">
+          <input className="auth-input" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+          <input className="auth-input" placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          <button type="submit" className="auth-submit-btn">{mode === 'signin' ? 'Sign In' : 'Create Account'}</button>
+        </form>
+        <div className="auth-modal-footer">
+          <button className="auth-link-btn" onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}>
+            {mode === 'signin' ? 'Create account' : 'Have an account? Sign in'}
+          </button>
+          <button className="auth-link-btn" onClick={() => { playAsGuest(); onClose?.(); }}>Play as Guest</button>
+        </div>
       </div>
     </div>
   );
