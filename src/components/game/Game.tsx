@@ -53,11 +53,14 @@ function GameRouter() {
 }
 
 export function Game() {
-  const [showAuthModal, setShowAuthModal] = useState(true);
+  const { initialized, isGuest } = useUser();
+  const [dismissed, setDismissed] = useState(false);
+  const showAuthModal = initialized && isGuest && !dismissed;
+
   return (
     <GameProvider>
       <div className="game-wrapper">
-        {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+        {showAuthModal && <AuthModal onClose={() => setDismissed(true)} />}
         <Header />
         <StatsBar />
         <GameRouter />
