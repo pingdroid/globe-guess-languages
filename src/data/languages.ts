@@ -194,18 +194,110 @@ export const languages: Language[] = [
   },
   {
     id: 'dutch', name: 'Dutch', aliases: ['nederlands'], family: 'Germanic', region: 'Europe', tier: 2, script: 'Latin',
-    clue: "Double vowels (aa, ee, oo, uu) and double consonants, ij digraph (kijken), words ending in -en.", confusedWith: ['German', 'Danish'],
-    sentences: ["Waar is het treinstation alstublieft?", "Ik hou erg van koffie 's ochtends.", "Het is vanavond erg koud buiten.", "We gaan dit weekend naar de markt.", "Het is een mooie dag vandaag.", "Hoe laat is het precies?", "Ik begrijp deze zin niet helemaal.", "Kunt u me dat uitleggen?", "Het eten smaakt echt heerlijk.", "Mijn broer woont in Amsterdam.", "De hond rent door het bos.", "We moeten de trein halen.", "Dat is een heel goede vraag.", "Zij leest een spannend boek.", "Ik heb gisteren mijn auto gewassen.", "De kat slaapt op de stoel.", "Morgen gaat het waarschijnlijk regenen.", "Ik wil graag een biertje bestellen.", "Waar kan ik hier parkeren?", "De kinderen spelen in de tuin."]
+    clue: "Double vowels (aa, ee, oo, uu), ij digraph (vrij, kijken), diminutive -je endings (huisje, boekje), words ending in -en.",
+    confusedWith: ['German', 'Afrikaans'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "Hoe laat gaat de markt vandaag dicht?",
+      "Mijn oma woont in een klein dorpje vlakbij Utrecht.",
+      "Het weer is de hele week behoorlijk koud geweest.",
+      "Ik zou graag drie boeken willen kopen, alstublieft.",
+      "De kinderen spelen buiten omdat het lekker weer is.",
+      "Waar kan ik hier in de buurt een goed restaurant vinden?",
+      "Ze vertelde me dat ze het probleem niet begreep.",
+      "Dit oude gebouw is tweehonderd jaar geleden gebouwd.",
+      // === Category B: Script-showcase (ij, double vowels, -je, -en) ===
+      "Mijn vriendin heeft een prachtig boekje over Nederlandse straatjes geschreven.",
+      "We moeten vanavond nog boodschappen doen bij de Albert Heijn.",
+      "Het scheepvaartmuseum aan het IJ is vrijdag geopend.",
+      "Zij kijken altijd samen naar de zonsondergang bij het IJsselmeer.",
+      "De gezelligheid in dit eetcafeëtje is echt onbetaalbaar.",
+      // === Category C: Cultural-distinctive (Dutch daily life) ===
+      "Ik ga met de fiets naar mijn werk, het is maar tien minuutjes.",
+      "Vanavond heb ik een verjaardag, dus ik neem een taart mee.",
+      "Het is alweer tijd voor Sinterklaas, de winkels zijn al versierd.",
+      "De agenda zit helemaal vol, laten we een borrel inplannen.",
+      "Ik heb een afspraak bij de huisarts gemaakt voor volgende week.",
+      "We gaan dit weekend naar de kringloopwinkel voor meubels.",
+      "De buren kwamen langs met een bosje bloemen toen we verhuisden.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Het warenhuis tegenover het postkantoor is vandaag gesloten.",
+      "Mijn opa werkte vroeger op een boerderij buiten de stad.",
+      "Ik weet niet zeker of dat een goed idee is.",
+      "Hij nam de trein vanmorgen vroeg.",
+      "Mijn zus is op vakantie."
+    ]
   },
   {
     id: 'swedish', name: 'Swedish', aliases: ['svenska'], family: 'Germanic', region: 'Europe', tier: 2, script: 'Latin',
-    clue: 'Vowels å, ä, ö. Definite articles are suffixed (-en, -et). Words ending in -r for present tense.', confusedWith: ['Danish', 'Norwegian'],
-    sentences: ["Var ligger tågstationen tack?", "Jag älskar kaffe på morgonen.", "Det är väldigt kallt ute ikväll.", "Vi går till marknaden den här helgen.", "Det är en vacker dag idag.", "Vad är klockan nu?", "Jag förstår inte den här meningen.", "Kan du förklara det för mig?", "Maten smakar verkligen underbart.", "Min bror bor i Stockholm.", "Hunden springer genom skogen.", "Vi måste hinna med tåget.", "Det är en mycket bra fråga.", "Hon läser en spännande bok.", "Jag tvättade min bil igår.", "Katten sover på stolen.", "Imorgon kommer det förmodligen att regna.", "Jag skulle vilja beställa en öl.", "Var kan jag parkera här?", "Barnen leker ute i trädgården."]
+    clue: "Unique vowels å, ä, ö. Definite articles suffixed to nouns (-en, -et, -n). Present tense verbs end in -r (äter, springer).",
+    confusedWith: ['Danish', 'Norwegian'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "Vilken tid stänger marknaden idag?",
+      "Min mormor bor i en liten by nära Göteborg.",
+      "Vädret har varit ganska kallt hela veckan.",
+      "Jag skulle vilja köpa tre böcker, tack.",
+      "Barnen leker utomhus för att vädret är fint.",
+      "Var kan man hitta en bra restaurang här i närheten?",
+      "Hon sa till mig att hon inte förstod problemet.",
+      "Den här gamla byggnaden byggdes för tvåhundra år sedan.",
+      // === Category B: Script-showcase (å, ä, ö, suffixed articles, -r) ===
+      "Köttbullarna på julbordet är alltid populärast bland gästerna.",
+      "Vårdcentralen på Drottninggatan öppnar klockan åtta varje morgon.",
+      "Midsommarafton firar vi alltid vid stugan nära sjön.",
+      "Bäckströms föräldrars sommarhus ligger vid Östersjön.",
+      "Förskolebarnen åker buss till naturreservatet varje torsdag.",
+      // === Category C: Cultural-distinctive (Swedish daily life) ===
+      "Ska vi ta en fika på det nya kaféet vid torget?",
+      "Allemansrätten gör att man kan plocka bär överallt i skogen.",
+      "Det är mörkt redan klockan tre, jag längtar efter våren.",
+      "Vi har fredagsmys ikväll med chips och en bra film.",
+      "Systembolaget stänger tidigt på lördagar, vi måste skynda oss.",
+      "Barnbidraget kommer den tjugonde varje månad.",
+      "Jag tar semester hela vecka tjugofem i år.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Köpcentralens öppettider ändrades förra månaden.",
+      "Min farfar jobbade i en fabrik utanför staden.",
+      "Jag vet inte om det är en bra idé.",
+      "Han tog tåget tidigt i morse.",
+      "Min syster reste bort igår."
+    ]
   },
   {
     id: 'polish', name: 'Polish', aliases: ['polski'], family: 'Slavic', region: 'Europe', tier: 2, script: 'Latin',
-    clue: 'High frequency of z, w, cz, sz, rz, dz. Diacritics: ą, ę, ł, ś, ć, ż, ź.', confusedWith: ['Czech', 'Slovak'],
-    sentences: ["Gdzie jest dworzec kolejowy?", "Bardzo lubię kawę rano.", "Dziś wieczorem jest bardzo zimno na zewnątrz.", "Idziemy na targ w ten weekend.", "To piękny dzień dzisiaj.", "Która jest teraz godzina?", "Nie rozumiem tego zdania.", "Czy możesz mi to wytłumaczyć?", "Jedzenie smakuje wspaniale.", "Mój brat mieszka w Warszawie.", "Pies biegnie przez las.", "Musimy zdążyć na pociąg.", "To jest bardzo dobre pytanie.", "Ona czyta ciekawą książkę.", "Wczoraj umyłem swój samochód.", "Kot śpi na krześle.", "Jutro prawdopodobnie będzie padać.", "Chciałbym zamówić jedno piwo.", "Gdzie mogę tutaj zaparkować?", "Dzieci bawią się w ogrodzie."]
+    clue: "Dense consonant clusters: cz, sz, rz, dz, szcz, prz. Unique diacritics: ą, ę, ł, ś, ć, ź, ż, ó.", confusedWith: ['Czech', 'Slovak'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "O której godzinie zamyka się dzisiaj rynek?",
+      "Moja babcia mieszka w małej wsi niedaleko Krakowa.",
+      "Pogoda była dość zimna przez cały tydzień.",
+      "Chciałbym kupić trzy książki, proszę.",
+      "Dzieci bawią się na dworze, bo jest ładna pogoda.",
+      "Gdzie w pobliżu można znaleźć dobrą restaurację?",
+      "Powiedziała mi, że nie rozumie problemu.",
+      "Ten stary budynek został zbudowany dwieście lat temu.",
+      // === Category B: Script-showcase (cz, sz, szcz, ą, ę, ł, ż) ===
+      "Szczęśliwy człowiek przeszedł przez ruchliwe skrzyżowanie.",
+      "W środę będziemy się przeczesywać przez wszystkie księgarnie.",
+      "Trzydzieści trzy trzciny rosły nad brzegiem rzeki.",
+      "Pszczoły brzęczały wśród kwitnących krzewów w ogrodzie.",
+      "Gość wszedł do łazienki i zaczął myć ręce.",
+      // === Category C: Cultural-distinctive (Polish daily life) ===
+      "W niedzielę sklepy są zamknięte, trzeba zrobić zakupy wcześniej.",
+      "Na imieniny dostałem kwiaty i czekoladki od sąsiadów.",
+      "Kolejka do lekarza pierwszego kontaktu trwała prawie dwie godziny.",
+      "W Wigilię zawsze zostawiamy jedno wolne miejsce przy stole.",
+      "Babcia zrobiła pierogi ruskie i barszcz czerwony na obiad.",
+      "Muszę jeszcze odebrać paczkę z paczkomatu przed szóstą.",
+      "Na działce sadziliśmy pomidory i ogórki w sobotę rano.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Skrzyżowanie przed urzędem miasta będzie zamknięte przez tydzień.",
+      "Mój dziadek pracował kiedyś w piekarni na przedmieściach.",
+      "Nie jestem pewien, czy to dobry pomysł.",
+      "Wsiadł do pociągu dziś rano.",
+      "Moja siostra pojechała na urlop."
+    ]
   },
   {
     id: 'russian', name: 'Russian', aliases: ['russkiy', 'русский'], family: 'Slavic', region: 'Europe', tier: 1, script: 'Cyrillic',
@@ -383,14 +475,76 @@ export const languages: Language[] = [
     ]
   },
   {
-    id: 'hindi', name: 'Hindi', aliases: ['hindustani'], family: 'Indo-Aryan', region: 'Asia', tier: 2, script: 'Devanagari',
-    clue: 'A continuous horizontal line runs across the top of most words. (Devanagari script).', confusedWith: ['Marathi', 'Nepali', 'Bengali'],
-    sentences: ["कृपया रेलवे स्टेशन कहाँ है?", "मुझे सुबह कॉफ़ी बहुत पसंद है।", "आज रात बाहर बहुत ठंड है।", "हम इस सप्ताहांत बाजार जाएंगे।", "आज एक खूबसूरत दिन है।", "अभी क्या समय हुआ है?", "मुझे यह वाक्य समझ नहीं आ रहा है।", "क्या आप मुझे यह समझा सकते हैं?", "खाना सच में बहुत स्वादिष्ट है।", "मेरा भाई दिल्ली में रहता है।", "कुत्ता जंगल में भाग रहा है।", "हमें ट्रेन पकड़नी है।", "यह एक बहुत अच्छा सवाल है।", "वह एक दिलचस्प किताब पढ़ रही है।", "कल मैंने अपनी गाड़ी धोई थी।", "बिल्ली कुर्सी पर सो रही है।", "कल शायद बारिश होगी।", "मैं एक बीयर ऑर्डर करना चाहूंगा।", "मैं यहाँ कहाँ पार्क कर सकता हूँ?", "बच्चे बगीचे में खेल रहे हैं।"]
+    id: 'hindi', name: 'Hindi', aliases: ['hindustani', 'हिन्दी'], family: 'Indo-Aryan', region: 'Asia', tier: 2, script: 'Devanagari',
+    clue: "Continuous horizontal headline (shirorekha) connecting letters across each word. Curved vertical strokes hanging below the line. Devanagari script.",
+    confusedWith: ['Marathi', 'Nepali', 'Bengali'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "आज बाज़ार कितने बजे बंद होता है?",
+      "मेरी दादी लखनऊ के पास एक छोटे से गाँव में रहती हैं।",
+      "इस पूरे हफ़्ते मौसम काफ़ी ठंडा रहा है।",
+      "मुझे तीन किताबें ख़रीदनी हैं, कृपया।",
+      "बच्चे बाहर खेल रहे हैं क्योंकि मौसम अच्छा है।",
+      "यहाँ आसपास कोई अच्छा रेस्तरां कहाँ मिलेगा?",
+      "उसने मुझसे कहा कि उसे समस्या समझ नहीं आ रही।",
+      "यह पुरानी इमारत दो सौ साल पहले बनाई गई थी।",
+      // === Category B: Script-showcase (shirorekha, conjuncts, matras) ===
+      "विद्यार्थियों को परीक्षा की तैयारी के लिए पुस्तकालय जाना चाहिए।",
+      "सरकार ने नई शिक्षा नीति के बारे में घोषणा की।",
+      "दिल्ली की सड़कों पर भीड़भाड़ हमेशा बनी रहती है।",
+      "कृपया अपना पंजीकरण प्रपत्र यहाँ जमा कीजिए।",
+      "बुधवार को सार्वजनिक अवकाश घोषित किया गया है।",
+      // === Category C: Cultural-distinctive (Indian daily life) ===
+      "चाय वाले ने कुल्हड़ में अदरक वाली चाय दी।",
+      "दीवाली पर पूरा मोहल्ला रोशनी से जगमगा उठता है।",
+      "सब्ज़ी मंडी में आज भिंडी और करेले बहुत सस्ते मिले।",
+      "ऑटो वाले ने मीटर से जाने से मना कर दिया।",
+      "गर्मियों में छत पर सोना और आम खाना सबसे अच्छा लगता है।",
+      "शादी में बारात ढोल-नगाड़ों के साथ आई।",
+      "बिजली कट गई है, इन्वर्टर भी बंद हो गया।",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "रेलवे स्टेशन के सामने नया शॉपिंग कॉम्प्लेक्स बन रहा है।",
+      "मेरे चाचा पुराने शहर में एक दुकान चलाते हैं।",
+      "मुझे नहीं लगता कि यह अच्छा विचार है।",
+      "वह आज सुबह ट्रेन से गया।",
+      "मेरी बहन छुट्टी पर गई है।"
+    ]
   },
   {
     id: 'turkish', name: 'Turkish', aliases: ['turkce', 'türkçe'], family: 'Turkic', region: 'Middle East/Europe', tier: 2, script: 'Latin',
-    clue: 'Features dotless ı, as well as ç, ş, ğ, ö, ü. Highly agglutinative (long suffixes).', confusedWith: ['Azerbaijani', 'Hungarian'],
-    sentences: ["Tren istasyonu nerede acaba?", "Sabahları çok kahve seviyorum.", "Bu gece dışarısı çok soğuk.", "Bu hafta sonu pazara gidiyoruz.", "Bugün güzel bir gün.", "Şu an saat kaç?", "Bu cümleyi anlamıyorum.", "Bunu bana açıklayabilir misin?", "Yemek gerçekten çok lezzetli.", "Erkek kardeşim İstanbul'da yaşıyor.", "Köpek ormanda koşuyor.", "Trene yetişmeliyiz.", "Bu çok iyi bir soru.", "O ilginç bir kitap okuyor.", "Dün arabamı yıkadım.", "Kedi sandalyede uyuyor.", "Yarın büyük ihtimalle yağmur yağacak.", "Bir bira sipariş etmek istiyorum.", "Burada nereye park edebilirim?", "Çocuklar bahçede oynuyor."]
+    clue: "Dotless ı (distinct from i), plus ç, ş, ğ, ö, ü. Highly agglutinative — long suffixed words (yapamayacaklarından). Vowel harmony.",
+    confusedWith: ['Azerbaijani', 'Hungarian'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "Bugün pazar kaçta kapanıyor?",
+      "Büyükannem İzmir yakınlarında küçük bir köyde yaşıyor.",
+      "Hava bütün hafta oldukça soğuk oldu.",
+      "Üç kitap satın almak istiyorum, lütfen.",
+      "Hava güzel olduğu için çocuklar dışarıda oynuyor.",
+      "Buralarda iyi bir restoran nerede bulabilirim?",
+      "Bana sorunu anlamadığını söyledi.",
+      "Bu eski bina iki yüz yıl önce inşa edilmiş.",
+      // === Category B: Script-showcase (ı, ş, ç, ğ, ö, ü, agglutination) ===
+      "Arkadaşlarımızla buluşamayacağımızı öğrendiğimizde çok üzüldük.",
+      "İstanbul'daki müşterilerimizin şikâyetlerini değerlendiriyoruz.",
+      "Başöğretmenimiz öğrencilerin başarılarını ödüllendirdi.",
+      "Güneşli havalarda sahildeki çay bahçesinde oturuyoruz.",
+      "Türkiye'nin güneydoğusundaki şehirleri gezmek istiyorum.",
+      // === Category C: Cultural-distinctive (Turkish daily life) ===
+      "Çay içmeden sabah toplantısına başlamak olmaz.",
+      "Komşu teyze kapıyı çaldı, elimde taze börek getirmiş.",
+      "Bayramda büyüklerin elini öpüp harçlık almak güzel gelenektir.",
+      "Dolmuş geçmedi, yirmi dakikadır güzergâhta bekliyorum.",
+      "Akşam mahalledeki bakkaldan ekmek ve ayran aldım.",
+      "Pazar günü kahvaltısı hazırlamak bizde aile geleneğidir.",
+      "Simit sarayında bir çay bir simit on beş liraya.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Yetkililerden şikâyetlerimizle ilgili açıklama bekliyoruz.",
+      "Dedem gençliğinde kasabada fırıncılık yaparmış.",
+      "Bunun iyi bir fikir olduğundan emin değilim.",
+      "Bu sabah otobüse bindi.",
+      "Kız kardeşim tatile gitti."
+    ]
   },
   {
     id: 'swahili', name: 'Swahili', aliases: ['kiswahili'], family: 'Bantu', region: 'Africa', tier: 2, script: 'Latin',
