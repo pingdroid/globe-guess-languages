@@ -588,10 +588,9 @@ export const languages: Language[] = [
   },
   {
     id: 'hebrew', name: 'Hebrew', aliases: ['ivrit', 'עברית'], family: 'Semitic', region: 'Middle East', tier: 2, script: 'Hebrew',
-    clue: 'Written right-to-left. Blocky characters with sharp square layouts and no cursive line connections (ם, ן, ך, ל, א).', confusedWith: ['Arabic', 'Yiddish'],
-    sentences: [
-      "איפה תחנת הרכבת בבקשה?", "אני מאוד אוהב קפה בבוקר.", "הלילה קר מאוד בחוץ.", "אנחנו הולכים לשוק בסוף השבוע.", "היום הוא יום יפה.", "מה השעה עכשיו?", "אני לא מבין את המשפט הזה.", "תוכל להסביר לי את זה בבקשה?", "האוכל פה ממש טעים.", "אח שלי גר בתל אביב.", "הכלב רץ בתוך היער.", "אנחנו חייבים לתפוס את הרכבת.", "זו שאלה מצוינת.", "היא קוראת ספר מעניין.", "אתמול שטפתי את המכונית שלי."
-    ]
+    clue: "Written right-to-left. Blocky, square-shaped characters with no cursive connections (unlike Arabic). Distinctive letters: ש, מ, ם, ן, ך.",
+    confusedWith: ['Arabic', 'Yiddish'],
+    sentences: ["מתי השוק נסגר היום?", "סבתא שלי גרה בכפר קטן ליד חיפה.", "מזג האוויר היה קר למדי כל השבוע.", "הייתי רוצה לקנות שלושה ספרים, בבקשה.", "הילדים משחקים בחוץ כי מזג האוויר נעים.", "איפה אפשר למצוא מסעדה טובה כאן בסביבה?", "היא אמרה לי שהיא לא מבינה את הבעיה.", "הבניין הישן הזה נבנה לפני מאתיים שנה.", "המשרד הממשלתי פתוח לקהל בימים ראשון עד חמישי בלבד.", "התלמידים והתלמידות השתתפו בטקס סיום השנה בבית הספר.", "הספרייה העירונית מציעה השאלת ספרים ללא תשלום.", "המכתב שקיבלתי מהמשפחה שלי הפתיע אותי מאוד.", "השכנים החדשים הזמינו אותנו לארוחת ערב ביום שישי.", "ביום שישי אנחנו הולכים לשוק הכרמל לקנות ירקות טריים.", "אחרי הצבא רוב החברים שלי טסו לטיול בדרום אמריקה.", "בשבת הכל סגור, אז צריך לקנות הכל מראש.", "החמסין הזה נורא, ארבעים מעלות בצל.", "תמיד שותים קפה הפוך אחרי ארוחת הצהריים.", "בערב חג אנחנו מדליקים נרות ואוכלים ביחד.", "הבירוקרטיה פה מטורפת, חיכיתי שעתיים בתור.", "האוניברסיטה נמצאת במרכז העיר ליד בית החולים הגדול.", "אחי עובד בבית מרקחת ליד התחנה.", "אני לא בטוח שזה רעיון טוב.", "הוא עלה על הרכבת הבוקר.", "אחותי נסעה לחופשה."]
   },
   {
     id: 'persian', name: 'Persian', aliases: ['farsi', 'parsi', 'فارسی'], family: 'Indo-Iranian', region: 'Middle East', tier: 3, script: 'Arabic-Persian',
@@ -609,10 +608,9 @@ export const languages: Language[] = [
   },
   {
     id: 'ukrainian', name: 'Ukrainian', aliases: ['ukrainska', 'українська'], family: 'Slavic', region: 'Europe', tier: 2, script: 'Cyrillic',
-    clue: 'Uses Cyrillic but is immediately identifiable by unique vowels i, ї, є and apostrophes. Lacks Russian letters ы, э.', confusedWith: ['Russian', 'Belarusian', 'Bulgarian'],
-    sentences: [
-      "Де знаходиться залізничний вокзал, будь ласка?", "Я дуже люблю каву вранці.", "Сьогодні ввечері на вулиці дуже холодно.", "Ми йдемо на ринок цими вихідними.", "Сьогодні прекрасний день.", "Котра зараз година?", "Я не розумію це речення.", "Чи можете ви мені це пояснити?", "Їжа справді дуже смачна.", "Мій брат живе в Києві.", "Собака біжить через ліс.", "Нам потрібно встигнути на потяг.", "Це дуже гарне питання.", "Вона читає цікаву книжку.", "Вчора я помив свою машину."
-    ]
+    clue: "Cyrillic with unique letters і, ї, є and frequent apostrophes (м'який). Lacks Russian letters ы and э.",
+    confusedWith: ['Russian', 'Belarusian', 'Bulgarian'],
+    sentences: ["О котрій годині сьогодні закривається ринок?", "Моя бабуся живе в маленькому селі неподалік від Львова.", "Погода була досить холодною протягом усього тижня.", "Я хотів би купити три книжки, будь ласка.", "Діти граються надворі, бо погода гарна.", "Де поблизу можна знайти хороший ресторан?", "Вона сказала мені, що не розуміє проблему.", "Ця стара будівля була збудована двісті років тому.", "З'їзд представників відбудеться п'ятнадцятого січня у Києві.", "Сім'я мого сусіда переїхала до нової квартири торік.", "Комп'ютерні курси починаються з наступного понеділка.", "Моя подруга п'є каву з молоком щоранку перед роботою.", "Хлопці грали у футбол на майданчику біля школи.", "Вареники з картоплею і сметаною — це моя улюблена страва.", "Маршрутка знову була переповнена, довелося чекати наступну.", "На Великдень ми фарбуємо писанки і печемо паску.", "Бабуся завжди готує борщ із пампушками на неділю.", "Черга в поліклініку зайняла майже дві години.", "Влітку їздимо на дачу збирати полуниці та вишні.", "Електроенергія знову подорожчала з першого числа.", "Університет знаходиться в центрі міста біля великої лікарні.", "Мій брат працює в аптеці недалеко від станції.", "Я не впевнений, що це гарна ідея.", "Він сів на потяг сьогодні вранці.", "Моя сестра поїхала у відпустку."]
   },
   {
     id: 'georgian', name: 'Georgian', aliases: ['kartuli', 'ქართული'], family: 'Kartvelian', region: 'Europe/Asia', tier: 4, script: 'Mkhedruli',
@@ -651,17 +649,15 @@ export const languages: Language[] = [
   },
   {
     id: 'danish', name: 'Danish', aliases: ['dansk'], family: 'Germanic', region: 'Europe', tier: 2, script: 'Latin',
-    clue: 'Utilizes character vowels æ, ø, å. Identical alphabet to Norwegian, but characteristically relies on soft consonant structures (af, og).', confusedWith: ['Norwegian', 'Swedish', 'Dutch'],
-    sentences: [
-      "Hvor er togstationen, tak?", "Jeg kan rigtig godt lide kaffe om morgenen.", "Det er meget koldt udenfor i aften.", "Vi skal på markedet i denne weekend.", "Det er en dejlig dag i dag.", "Hvad er klokken lige nu?", "Jeg forstår overhovedet ikke denne sætning.", "Kan du forklare det for mig?", "Maten smager virkelig lækkert.", "Min bror bor i København.", "Hunden løber igennem skoven.", "Vi skal nå at fange toget.", "Det er et rigtig godt spørgsmål.", "Hun læser en spændende bog.", "I går vaskede jeg min bil."
-    ]
+    clue: "Vowels æ, ø, å. Soft consonant clusters (af, og, med). Double-d pronounced as soft 'th'. Words like og, det, ikke, ikke, har appear often.",
+    confusedWith: ['Norwegian', 'Swedish'],
+    sentences: ["Hvad tid lukker markedet i dag?", "Min bedstemor bor i en lille landsby tæt på Aarhus.", "Vejret har været ret koldt hele ugen.", "Jeg vil gerne købe tre bøger, tak.", "Børnene leger udenfor, fordi vejret er godt.", "Hvor kan man finde en god restaurant her i nærheden?", "Hun fortalte mig, at hun ikke forstod problemet.", "Denne gamle bygning blev bygget for to hundrede år siden.", "Nørrebrogade er en af de mest trafikerede gader i København.", "Min datter går i børnehave tæt på søen i nærheden.", "Fødevarebutikken på hjørnet sælger økologiske grøntsager.", "Blæsten fra Øresund gør det ekstra koldt om vinteren.", "Størstedelen af møblerne er købt brugt på loppemarkeder.", "Hygge er noget vi dyrker med stearinlys og varme tæpper.", "Cykelstierne i København gør det nemt at komme rundt.", "Det er mørkt allerede klokken tre om vinteren, det er hårdt.", "I fredags havde vi fællesspisning i opgangen med naboerne.", "Mor laver altid flæskesteg med rødkål og kartofler til jul.", "Fritidshuset på Bornholm bruger vi mest om sommeren.", "SU-en dækker lige netop huslejen, men ikke meget mere.", "Posthuset overfor biblioteket er lukket i dag.", "Min bedstefar arbejdede tidligere på et mejeri udenfor byen.", "Jeg er ikke sikker på, at det er en god idé.", "Han tog toget tidligt i morges.", "Min søster er taget på ferie."]
   },
   {
     id: 'norwegian', name: 'Norwegian', aliases: ['norsk'], family: 'Germanic', region: 'Europe', tier: 2, script: 'Latin',
-    clue: 'Utilizes character vowels æ, ø, å. Identical alphabet to Danish but relies heavily on hard consonant endings (-k, -t, -p).', confusedWith: ['Danish', 'Swedish', 'Icelandic'],
-    sentences: [
-      "Hvor er togstasjonen, er du snill?", "Jeg elsker kaffe på morgenen.", "Det er veldig kaldt ute i kveld.", "Vi skal dra på markedet denne helgen.", "Det er en nydelig dag i dag.", "Hvor mye er klokken nå?", "Jeg skjønner ikke denne setningen.", "Kan du forklare dette for meg?", "Maten smaker virkelig fantastisk.", "Broren min bor i Oslo.", "Hunden løper gjennom skogen.", "Vi må rekke toget vårt.", "Det er et kjempebra spørsmål.", "Hun leser en kjempespennende bok.", "I går vasket jeg bilen min."
-    ]
+    clue: "Vowels æ, ø, å (same as Danish). Harder consonant endings (-k, -t, -g). Common words: ikke, jeg, det, og, har, kan.",
+    confusedWith: ['Danish', 'Swedish', 'Icelandic'],
+    sentences: ["Når stenger markedet i dag?", "Bestemoren min bor i en liten landsby i nærheten av Bergen.", "Været har vært ganske kaldt hele uken.", "Jeg vil gjerne kjøpe tre bøker, takk.", "Barna leker ute fordi været er fint.", "Hvor kan man finne en god restaurant her i nærheten?", "Hun fortalte meg at hun ikke forsto problemet.", "Denne gamle bygningen ble bygget for to hundre år siden.", "Fjellvandringen tok oss seks timer fra hytten til toppen.", "Nordmenn bruker ofte uttrykket kos når de snakker om hygge.", "Hurtigruten seiler langs hele kysten fra Bergen til Kirkenes.", "Vinteren i Nord-Norge er mørk, men nordlyset gjør opp for det.", "Barnehagen ligger rett ved siden av matbutikken i sentrum.", "Vi tar gjerne med matpakke til lunsj på jobben hver dag.", "Skiløypene i Nordmarka åpner så snart det kommer nok snø.", "Hyttetur i påsken er en tradisjon nesten alle nordmenn har.", "Bunaden bruker vi på syttende mai og andre festdager.", "Vi handler på Rema eller Kiwi fordi det er billigst der.", "Strømprisen har gått opp igjen, det merkes på regningen.", "Feriekabinen vår ligger ved en fjord i Vestland.", "Apoteket overfor postkontoret er stengt i dag.", "Bestefaren min jobbet tidligere i en bakeri utenfor byen.", "Jeg er ikke sikker på at det er en god idé.", "Han tok toget tidlig i morges.", "Søsteren min dro på ferie."]
   },
   {
     id: 'romanian', name: 'Romanian', aliases: ['romana', 'română'], family: 'Romance', region: 'Europe', tier: 3, script: 'Latin',
