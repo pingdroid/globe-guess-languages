@@ -13,9 +13,40 @@ export interface Language {
 
 export const languages: Language[] = [
   {
-    id: 'french', name: 'French', aliases: ['francais'], family: 'Romance', region: 'Europe', tier: 1, script: 'Latin',
-    clue: "Frequent apostrophes (l', j', qu'), words ending in -eau, -eux, accents (é, è, ç).", confusedWith: ['Italian', 'Spanish'],
-    sentences: ["Où est la gare s'il vous plaît?", "J'aime beaucoup le café le matin.", "Il fait froid dehors ce soir.", "Nous allons au marché ce weekend.", "C'est une belle journée aujourd'hui.", "Je ne comprends pas ce que vous dites.", "Pouvez-vous m'aider à trouver mon chemin?", "La nourriture ici est vraiment délicieuse.", "À quelle heure le train arrive-t-il?", "Il pleut des cordes depuis ce matin.", "Je suis très heureux de vous rencontrer.", "Combien coûte ce livre ancien?", "Nous habitons près de la tour Eiffel.", "Les enfants jouent dans le parc.", "J'ai oublié mes clés à la maison.", "Elle lit un roman très intéressant.", "Le chat dort sur le canapé.", "Voulez-vous boire un verre de vin?", "Ce film était incroyable à regarder.", "Mon frère travaille dans un hôpital."]
+    id: 'french', name: 'French', aliases: ['francais', 'français'], family: 'Romance', region: 'Europe', tier: 1, script: 'Latin',
+    clue: "Frequent apostrophes (l', j', d', qu'), words ending in -eau/-eux/-tion, accents (é, è, ê, ç), silent final consonants.",
+    confusedWith: ['Italian', 'Spanish'],
+    sentences: [
+      // === Category A: Template sentences (shared topics, feature-rich) ===
+      "À quelle heure est-ce que le marché ferme aujourd'hui?",
+      "Ma grand-mère habite dans un petit village près de Lyon.",
+      "Le temps a été vraiment froid toute la semaine.",
+      "Je voudrais acheter trois livres s'il vous plaît.",
+      "Les enfants jouent dehors parce qu'il fait beau.",
+      "Où est-ce qu'on peut trouver un bon restaurant par ici?",
+      "Elle m'a dit qu'elle ne comprenait pas le problème.",
+      "Ce vieil immeuble a été construit il y a deux cents ans.",
+      // === Category B: Script-showcase (apostrophes, accents, -eau/-eux) ===
+      "L'électricité n'est pas chère, mais l'eau coûte de plus en plus cher.",
+      "Il s'est présenté à l'entrée du château avec beaucoup d'élégance.",
+      "C'est l'été, je m'ennuie un peu, j'aimerais qu'on aille à la pêche.",
+      "Qu'est-ce que c'est que cette drôle d'idée?",
+      "Les gâteaux qu'elle prépare sont toujours délicieux et très généreux.",
+      // === Category C: Cultural-distinctive (French daily life, not stereotypes) ===
+      "On se retrouve à la terrasse vers dix-huit heures pour l'apéro?",
+      "La grève des transports a encore perturbé mon trajet ce matin.",
+      "Il faut qu'on fasse la queue à la préfecture pour le renouvellement.",
+      "Le pont de l'Ascension tombe bien cette année, on part quatre jours.",
+      "J'ai trouvé une super boulangerie qui fait des pains au levain.",
+      "Tu as vu les résultats du bac? Apparemment c'était difficile cette année.",
+      "Le propriétaire a augmenté le loyer sans prévenir, c'est pas normal.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Aujourd'hui, j'ai beaucoup de choses à faire avant ce soir.",
+      "L'anniversaire de mon neveu est le vingt-quatre décembre.",
+      "Je ne sais pas si c'est une bonne idée.",
+      "Il a pris le train ce matin.",
+      "Ma sœur est partie en vacances."
+    ]
   },
   {
     id: 'spanish', name: 'Spanish', aliases: ['espanol', 'español'], family: 'Romance', region: 'Europe/Americas', tier: 1, script: 'Latin',
