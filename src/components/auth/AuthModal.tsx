@@ -5,13 +5,14 @@ export default function AuthModal({ onClose }: { onClose?: () => void }) {
   const { signIn, signUp, playAsGuest } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [mode, setMode] = useState<'signin'|'signup'>('signin');
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     try {
       if (mode === 'signin') await signIn(email, password);
-      else await signUp(email, password);
+      else await signUp(email, password, username);
       onClose?.();
     } catch (err: any) {
       console.error(err);
@@ -26,6 +27,9 @@ export default function AuthModal({ onClose }: { onClose?: () => void }) {
         <h3 className="auth-modal-title">{mode === 'signin' ? 'Welcome back' : 'Create account'}</h3>
         <p className="auth-modal-subtitle">{mode === 'signin' ? 'Sign in to sync your progress.' : 'Sign up to save your stats across devices.'}</p>
         <form onSubmit={submit} className="auth-form">
+          {mode === 'signup' && (
+            <input className="auth-input" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+          )}
           <input className="auth-input" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
           <input className="auth-input" placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
           <button type="submit" className="auth-submit-btn">{mode === 'signin' ? 'Sign In' : 'Create Account'}</button>

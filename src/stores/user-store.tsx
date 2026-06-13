@@ -3,12 +3,12 @@
   import { setStatsAdapter } from '../lib/stats-adapter';
   import { makeSupabaseAdapter, fetchRemoteStats, upsertRemoteStats } from '../lib/supabase-adapter';
 
-  type User = { id: string; email?: string } | null;
+  type User = { id: string; email?: string; username?: string } | null;
 
   const UserContext = createContext<{
     user: User;
     signIn: (email: string, password: string) => Promise<void>;
-    signUp: (email: string, password: string) => Promise<void>;
+    signUp: (email: string, password: string, username: string) => Promise<void>;
     signOut: () => Promise<void>;
     playAsGuest: () => void;
     isGuest: boolean;
@@ -28,7 +28,7 @@
           const session = data.session;
           if (!mounted) return;
           if (session && session.user) {
-            setUser({ id: session.user.id, email: session.user.email ?? undefined });
+            setUser({ id: session.user.id, email: session.user.email ?? undefined, username: session.user.user_metadata?.username });
             setIsGuest(false);
             setStatsAdapter(makeSupabaseAdapter(session.user.id));
             setInitialized(true);
@@ -51,7 +51,7 @@
       const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
         if (!mounted) return;
         if (session && session.user) {
-          setUser({ id: session.user.id, email: session.user.email ?? undefined });
+          setUser({ id: session.user.id, email: session.user.email ?? undefined, username: session.user.user_metadata?.username });
           setIsGuest(false);
           setStatsAdapter(makeSupabaseAdapter(session.user.id));
           setInitialized(true);
@@ -77,7 +77,7 @@
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
       const u = data.user;
-      setUser({ id: u.id, email: u.email ?? undefined });
+      setUser({ id: u.id, email: u.email ?? undefined, username: u.user_metadata?.username });
       setIsGuest(false);
       setStatsAdapter(makeSupabaseAdapter(u.id));
       try {
@@ -115,11 +115,11 @@
       }
     }
 
-    async function signUp(email: string, password: string) {
-      const { data, error } = await supabase.auth.signUp({ email, password });
+    async function signUp(email: string, password: string, username: string) {
+      const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { username } } });
       if (error) throw error;
       const u = data.user;
-      setUser({ id: u!.id, email: u!.email ?? undefined });
+      setUser({ id: u!.id, email: u!.email ?? undefined, username: u!.user_metadata?.username });
       setIsGuest(false);
       setStatsAdapter(makeSupabaseAdapter(u!.id));
     }
