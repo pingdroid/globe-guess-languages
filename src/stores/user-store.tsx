@@ -86,6 +86,7 @@
         const local = localRaw ? JSON.parse(localRaw) : null;
         if (local && !remote) {
           await upsertRemoteStats(u.id, local);
+          localStorage.setItem('languess_stats_v1', JSON.stringify(local));
         } else if (local && remote) {
           const merged = { ...remote };
           merged.games = (remote.games ?? 0) + (local.games ?? 0);
@@ -98,8 +99,10 @@
   local.bestTimeMs ?? Infinity);
           merged.langHistory = { ...(remote.langHistory ?? {}), ...(local.langHistory ?? {}) };
           await upsertRemoteStats(u.id, merged);
+          localStorage.setItem('languess_stats_v1', JSON.stringify(merged));
+        } else if (remote) {
+          localStorage.setItem('languess_stats_v1', JSON.stringify(remote));
         }
-        try { localStorage.removeItem('languess_stats_v1'); } catch {}
       } catch (e) {
         console.error('merge failed', e);
       }
