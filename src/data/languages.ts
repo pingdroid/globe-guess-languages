@@ -50,23 +50,147 @@ export const languages: Language[] = [
   },
   {
     id: 'spanish', name: 'Spanish', aliases: ['espanol', 'español'], family: 'Romance', region: 'Europe/Americas', tier: 1, script: 'Latin',
-    clue: 'Inverted punctuation (¿, ¡), tilde over n (ñ), frequent endings in -ción, -dad.', confusedWith: ['Portuguese', 'Italian'],
-    sentences: ["¿Dónde está la biblioteca?", "Me gusta mucho el café por la mañana.", "Hace frío afuera esta noche.", "Vamos al mercado este fin de semana.", "Es un hermoso día hoy.", "¿Cómo te llamas, amigo mío?", "No hablo muy bien el idioma.", "Quiero comer una paella deliciosa.", "El museo está cerrado los lunes.", "Tengo que ir a trabajar temprano.", "Mis padres viven en la ciudad.", "El cielo está muy despejado hoy.", "Necesito comprar billetes de tren.", "¿A qué hora empieza la película?", "Ella tiene un perro pequeño.", "Nosotros estudiamos todos los días.", "El libro está sobre la mesa.", "Me duele mucho la cabeza ahora.", "Vamos a la playa a nadar.", "¡Qué sorpresa tan agradable verte!"]
+    clue: "Inverted punctuation (¿, ¡), tilde over n (ñ), frequent endings in -ción/-dad/-mente, accent on final syllable stress (café, también).",
+    confusedWith: ['Portuguese', 'Italian'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "¿A qué hora cierra el mercado hoy?",
+      "Mi abuela vive en un pequeño pueblo cerca de Sevilla.",
+      "El tiempo ha sido bastante frío toda la semana.",
+      "Me gustaría comprar tres libros, por favor.",
+      "Los niños juegan afuera porque hace buen tiempo.",
+      "¿Dónde se puede encontrar un buen restaurante por aquí?",
+      "Ella me dijo que no entendía el problema.",
+      "Este viejo edificio fue construido hace doscientos años.",
+      // === Category B: Script-showcase (¿¡, ñ, -ción, accents) ===
+      "¿Cuántos años llevas estudiando esta especialización?",
+      "¡Qué maravillosa actuación la del músico español!",
+      "La señora Muñoz enseña comunicación en la universidad.",
+      "¿No crees que deberíamos añadir más información?",
+      "¡Felicidades! Tu presentación fue una inspiración para todos.",
+      // === Category C: Cultural-distinctive (Spanish daily life) ===
+      "Quedamos a las diez de la noche para cenar, ¿te parece bien?",
+      "La siesta no es solo dormir, es parar un rato después de comer.",
+      "Este fin de semana hay una verbena en la plaza del pueblo.",
+      "El horario partido me deja poco tiempo entre la mañana y la tarde.",
+      "Hemos reservado una casa rural en Asturias para el puente de mayo.",
+      "¿Has probado las croquetas que prepara mi madre? Son increíbles.",
+      "El bar de abajo pone unas tapas buenísimas con cada caña.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "¿Cuándo empieza la próxima reunión de la organización?",
+      "El niño pequeño juega con su muñeca favorita.",
+      "No me parece una buena idea salir tan tarde.",
+      "Tiene que ir a la oficina antes de las nueve.",
+      "El tren sale a las ocho de la mañana."
+    ]
   },
   {
     id: 'german', name: 'German', aliases: ['deutsch'], family: 'Germanic', region: 'Europe', tier: 1, script: 'Latin',
-    clue: 'Capitalized nouns, umlauts (ä, ö, ü), eszett (ß), long compound words.', confusedWith: ['Dutch', 'Swedish'],
-    sentences: ["Wo ist der Bahnhof bitte?", "Ich trinke gerne Kaffee am Morgen.", "Es ist heute Abend sehr kalt.", "Wir gehen dieses Wochenende auf den Markt.", "Es ist ein schöner Tag heute.", "Wie spät ist es jetzt genau?", "Ich verstehe diesen Satz nicht.", "Können Sie mir das bitte erklären?", "Das Essen schmeckt wunderbar.", "Mein Bruder lebt in Berlin.", "Der Hund läuft durch den Wald.", "Wir müssen den Zug erwischen.", "Das ist eine sehr gute Frage.", "Sie liest ein spannendes Buch.", "Ich habe gestern mein Auto gewaschen.", "Die Katze schläft auf dem Stuhl.", "Morgen wird es wahrscheinlich regnen.", "Ich möchte ein Bier bestellen.", "Wo kann ich hier parken?", "Die Kinder spielen im Garten."]
+    clue: "Capitalised nouns (Haus, Straße), umlauts (ä, ö, ü), eszett (ß), long compound words (Krankenhaus, Straßenbahn).",
+    confusedWith: ['Dutch', 'Swedish'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "Um wie viel Uhr macht der Markt heute zu?",
+      "Meine Großmutter wohnt in einem kleinen Dorf in der Nähe von München.",
+      "Das Wetter war die ganze Woche ziemlich kalt.",
+      "Ich möchte gerne drei Bücher kaufen, bitte.",
+      "Die Kinder spielen draußen, weil das Wetter schön ist.",
+      "Wo kann man hier in der Nähe ein gutes Restaurant finden?",
+      "Sie hat mir gesagt, dass sie das Problem nicht versteht.",
+      "Dieses alte Gebäude wurde vor zweihundert Jahren gebaut.",
+      // === Category B: Script-showcase (capitals, ß, umlauts, compounds) ===
+      "Der Straßenbahnfahrplan hängt am Hauptbahnhof neben dem Ausgang.",
+      "Die Geschäftsführerin der Großbäckerei eröffnete eine Außenstelle.",
+      "Über fünfhundert Fußgänger überquerten gestern die Brücke.",
+      "Das Frühstück im Straßencafé war überraschend günstig.",
+      "Die Schlüsselübergabe für die Wohnung findet übermorgen statt.",
+      // === Category C: Cultural-distinctive (German daily life) ===
+      "Der Vermieter hat die Nebenkostenabrechnung schon wieder falsch berechnet.",
+      "Am Sonntag haben alle Geschäfte zu, das vergesse ich jedes Mal.",
+      "Hast du deine Steuererklärung schon beim Finanzamt abgegeben?",
+      "Wir müssen unbedingt rechtzeitig den Termin bei der Ausländerbehörde machen.",
+      "Die Bahn hatte heute wieder zwanzig Minuten Verspätung.",
+      "Am Wochenende machen wir eine Wanderung im Schwarzwald.",
+      "Ich muss noch Pfand zurückbringen, die Flaschen stapeln sich schon.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Die Straßenkreuzung vor dem Rathaus wird nächste Woche gesperrt.",
+      "Mein Großvater hat früher in einer Bäckerei gearbeitet.",
+      "Ich bin nicht sicher, ob das eine gute Idee ist.",
+      "Er hat den Zug heute Morgen genommen.",
+      "Mein Bruder ist in der Stadt."
+    ]
   },
   {
     id: 'italian', name: 'Italian', aliases: ['italiano'], family: 'Romance', region: 'Europe', tier: 1, script: 'Latin',
-    clue: 'Almost all words end in a vowel, double consonants (tt, ll, nn), accents usually terminal (è, à).', confusedWith: ['Spanish', 'French'],
-    sentences: ["Dov'è la stazione per favore?", "Mi piace molto il caffè la mattina.", "Fa freddo fuori stasera.", "Andiamo al mercato questo fine settimana.", "È una bellissima giornata oggi.", "Come ti chiami?", "Non parlo bene questa lingua.", "Voglio mangiare una pizza Margherita.", "Il museo è chiuso il lunedì.", "Devo andare a lavorare presto.", "I miei genitori vivono in città.", "Il cielo è molto limpido oggi.", "Ho bisogno di comprare i biglietti.", "A che ora inizia il film?", "Lei ha un cane piccolo.", "Noi studiamo tutti i giorni.", "Il libro è sul tavolo.", "Mi fa molto male la testa.", "Andiamo in spiaggia a nuotare.", "Che bella sorpresa vederti qui!"]
+    clue: "Nearly all words end in a vowel (-a, -o, -e, -i), double consonants (tt, ll, nn, zz), terminal accents (è, à, ù, ò).",
+    confusedWith: ['Spanish', 'French'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "A che ora chiude il mercato oggi?",
+      "Mia nonna vive in un piccolo paese vicino a Firenze.",
+      "Il tempo è stato abbastanza freddo tutta la settimana.",
+      "Vorrei comprare tre libri, per favore.",
+      "I bambini giocano fuori perché fa bel tempo.",
+      "Dove si può trovare un buon ristorante qui vicino?",
+      "Mi ha detto che non capiva il problema.",
+      "Questo vecchio palazzo è stato costruito duecento anni fa.",
+      // === Category B: Script-showcase (vowel endings, double consonants, accents) ===
+      "La ragazza attraversò velocemente la piazza sotto la pioggia battente.",
+      "Quell'appartamento bellissimo è disponibile dall'otto settembre.",
+      "Il programma dell'università prevede quattordici settimane di lezione.",
+      "La mozzarella e la bruschetta sono le specialità della trattoria.",
+      "L'appuntamento è stato annullato perché il dottore è ammalato.",
+      // === Category C: Cultural-distinctive (Italian daily life) ===
+      "Prendiamo un caffè al bar prima di andare in ufficio?",
+      "Stasera facciamo la passeggiata sul lungomare dopo cena.",
+      "Il motorino è l'unico modo per muoversi nel centro storico.",
+      "Mia madre prepara il sugo da zero ogni domenica mattina.",
+      "Quest'anno il Ferragosto cade di venerdì, facciamo il ponte.",
+      "Il condominio ha votato contro il rifacimento della facciata.",
+      "Ho preso un cornetto e un cappuccino al bar sotto casa.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "L'alluvione ha distrutto completamente il bellissimo villaggio medievale.",
+      "Mio zio lavora in una pizzeria nel centro della città.",
+      "Non sono sicuro che sia una buona idea.",
+      "Ha preso il treno stamattina presto.",
+      "Mio fratello è partito ieri sera."
+    ]
   },
   {
     id: 'portuguese', name: 'Portuguese', aliases: ['portugues', 'português'], family: 'Romance', region: 'Europe/Americas', tier: 1, script: 'Latin',
-    clue: 'Use of ã, õ, ç, frequent endings in -ão, -ções, -mente. No inverted question marks.', confusedWith: ['Spanish', 'Galician'],
-    sentences: ["Onde fica a estação de trem?", "Eu gosto muito de café pela manhã.", "Está frio lá fora esta noite.", "Vamos ao mercado neste fim de semana.", "Está um lindo dia hoje.", "Como você se chama?", "Eu não falo bem esse idioma.", "Quero comer um pastel de nata.", "O museu está fechado às segundas.", "Tenho que ir trabalhar cedo.", "Meus pais moram na cidade.", "O céu está muito limpo hoje.", "Preciso comprar passagens de trem.", "A que horas começa o filme?", "Ela tem um cachorro pequeno.", "Nós estudamos todos os dias.", "O livro está em cima da mesa.", "Minha cabeça dói muito agora.", "Vamos à praia para nadar.", "Que surpresa agradável te ver!"]
+    clue: "Nasal vowels (ã, õ), cedilla (ç), endings in -ão/-ões/-mente, circumflex (ê, ô). No inverted punctuation (unlike Spanish).",
+    confusedWith: ['Spanish', 'Galician'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "A que horas é que o mercado fecha hoje?",
+      "A minha avó mora numa pequena aldeia perto de Coimbra.",
+      "O tempo tem estado bastante frio a semana toda.",
+      "Gostaria de comprar três livros, por favor.",
+      "As crianças brincam lá fora porque está bom tempo.",
+      "Onde é que se pode encontrar um bom restaurante aqui perto?",
+      "Ela disse-me que não compreendia o problema.",
+      "Este edifício antigo foi construído há duzentos anos.",
+      // === Category B: Script-showcase (ã, õ, ç, -ão, ê, ô) ===
+      "A informação sobre a situação dos cidadãos está disponível na estação.",
+      "Os irmãos compraram pão e melão no supermercado de manhã.",
+      "A organização das eleições correu sem complicações.",
+      "O coração da avó ficou cheio de emoção com a canção.",
+      "As condições de habitação nesta região são preocupantes.",
+      // === Category C: Cultural-distinctive (Portuguese daily life) ===
+      "Vamos tomar uma bica antes de ir para o escritório?",
+      "A tasca ali ao lado tem uns petiscos espetaculares.",
+      "O bacalhau da minha mãe é sempre o melhor prato da consoada.",
+      "Apanhei o comboio das sete e meia em Cais do Sodré.",
+      "Aos domingos vamos sempre passear junto ao rio com o cão.",
+      "A senhora da padaria já me conhece e guarda-me sempre o pão.",
+      "O meu senhorio aumentou a renda e agora não sei o que fazer.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "A população desta região não concorda com a decisão do governo.",
+      "O meu irmão trabalha numa farmácia perto da estação.",
+      "Não tenho a certeza de que seja boa ideia.",
+      "Ele apanhou o comboio esta manhã.",
+      "A minha irmã foi de férias."
+    ]
   },
   {
     id: 'dutch', name: 'Dutch', aliases: ['nederlands'], family: 'Germanic', region: 'Europe', tier: 2, script: 'Latin',
