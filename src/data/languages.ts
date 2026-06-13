@@ -209,28 +209,178 @@ export const languages: Language[] = [
   },
   {
     id: 'russian', name: 'Russian', aliases: ['russkiy', 'русский'], family: 'Slavic', region: 'Europe', tier: 1, script: 'Cyrillic',
-    clue: 'Uses the Cyrillic alphabet (я, и, г, д, ж, п, ф). No Latin letters.', confusedWith: ['Ukrainian', 'Bulgarian'],
-    sentences: ["Где находится вокзал?", "Я очень люблю кофе по утрам.", "Сегодня вечером очень холодно.", "Мы идём на рынок в эти выходные.", "Сегодня прекрасный день.", "Который сейчас час?", "Я не понимаю это предложение.", "Не могли бы вы мне это объяснить?", "Еда действительно вкусная.", "Мой брат живет в Москве.", "Собака бежит по лесу.", "Нам нужно успеть на поезд.", "Это очень хороший вопрос.", "Она читает интересную книгу.", "Вчера я помыл свою машину.", "Кошка спит на стуле.", "Завтра, вероятно, пойдет дождь.", "Я бы хотел заказать пиво.", "Где здесь можно припарковаться?", "Дети играют в саду."]
+    clue: "Cyrillic alphabet with distinctive letters: я, ж, щ, ы, э. Soft sign ь and hard sign ъ. No Latin letters.", confusedWith: ['Ukrainian', 'Bulgarian'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "Во сколько сегодня закрывается рынок?",
+      "Моя бабушка живёт в маленькой деревне недалеко от Казани.",
+      "Погода всю неделю была довольно холодной.",
+      "Я хотел бы купить три книги, пожалуйста.",
+      "Дети играют на улице, потому что тепло.",
+      "Где поблизости можно найти хороший ресторан?",
+      "Она сказала мне, что не понимает проблему.",
+      "Это старое здание было построено двести лет назад.",
+      // === Category B: Script-showcase (ж, щ, ы, ь, ъ, я) ===
+      "Жизнь в большом городе требует большого терпения и выдержки.",
+      "Мужчина в жёлтой куртке перешёл площадь на красный свет.",
+      "Мощёные дорожки в старом центре выглядят очень живописно.",
+      "Он подъехал к подъезду и вышел из машины.",
+      "Учёные обнаружили новый вид бабочек в дальневосточных лесах.",
+      // === Category C: Cultural-distinctive (Russian daily life) ===
+      "Давай встретимся у выхода из метро через полчаса.",
+      "В этом году дачный сезон начался раньше обычного.",
+      "На Новый год мы всей семьёй смотрели обращение президента.",
+      "Очередь в поликлинику заняла почти два часа.",
+      "Мы собрали грибы в лесу и сварили из них суп.",
+      "После бани мы пили чай с вареньем из малины.",
+      "Маршрутка пришла полупустой, что бывает очень редко.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "Вчера мы ходили в театр на новый спектакль.",
+      "Бабушка приготовила щи с квашеной капустой.",
+      "Я не уверен, что это хорошая мысль.",
+      "Он сел на поезд сегодня утром.",
+      "Мой брат уехал вчера."
+    ]
   },
   {
     id: 'japanese', name: 'Japanese', aliases: ['nihongo', '日本語'], family: 'Japonic', region: 'Asia', tier: 1, script: 'Kanji / Kana',
-    clue: 'Mixes complex Chinese characters (Kanji) with simple, curved/angular phonetic characters (Hiragana/Katakana).', confusedWith: ['Mandarin', 'Korean'],
-    sentences: ["駅はどこですか？", "私は毎朝コーヒーを飲みます。", "今夜はとても寒いです。", "今週末に市場へ行きます。", "今日は美しい日です。", "今何時ですか？", "この文が理解できません。", "これを私に説明してくれますか？", "食べ物は本当に美味しいです。", "私の兄は東京に住んでいます。", "犬が森の中を走っています。", "私たちは電車に乗らなければなりません。", "それはとても良い質問ですね。", "彼女は面白い本を読んでいます。", "昨日、私は車を洗いました。", "猫が椅子の上で眠っています。", "明日はたぶん雨が降るでしょう。", "ビールを一つ注文したいです。", "どこに駐車できますか？", "子供たちが庭で遊んでいます。"]
+    clue: "Mixes complex Chinese characters (Kanji) with simple curved Hiragana (の, は, を) and angular Katakana (ア, カ). Three scripts visible simultaneously.", confusedWith: ['Mandarin', 'Korean'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "今日は市場が何時に閉まりますか？",
+      "祖母は京都の近くの小さな村に住んでいます。",
+      "今週はずっと天気が寒かったです。",
+      "本を三冊買いたいのですが。",
+      "天気がいいので子供たちは外で遊んでいます。",
+      "この近くにおいしいレストランはありますか？",
+      "彼女は問題が分からないと言いました。",
+      "この古い建物は二百年前に建てられました。",
+      // === Category B: Script-showcase (Kanji + Hiragana + Katakana mix) ===
+      "コンビニでアイスコーヒーとサンドイッチを買いました。",
+      "東京スカイツリーの展望デッキからの眺めは最高でした。",
+      "スマートフォンのバッテリーがすぐなくなってしまいます。",
+      "テレビのニュースで地震のことを知りました。",
+      "パスポートをホテルのフロントに預けてあります。",
+      // === Category C: Cultural-distinctive (Japanese daily life) ===
+      "終電に間に合わないかもしれない。",
+      "満員電車で毎朝一時間立ちっぱなしです。",
+      "花見の場所取りを朝の六時からやりました。",
+      "この居酒屋は飲み放題で三千円だそうです。",
+      "来月の連休に温泉旅行を計画しています。",
+      "コンビニの肉まんが冬になると恋しくなります。",
+      "引っ越しの挨拶に隣の人へお菓子を持って行きました。",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "レストランでカレーライスを注文しました。",
+      "駅前の本屋で漫画を買いました。",
+      "今日は忙しい一日でした。",
+      "朝早く電車に乗りました。",
+      "姉は旅行に行きました。"
+    ]
   },
   {
     id: 'korean', name: 'Korean', aliases: ['hangul', '한국어'], family: 'Koreanic', region: 'Asia', tier: 1, script: 'Hangul',
-    clue: 'Characters are blocky, highly geometric combinations of circles, straight lines, and squares (ㅇ, ㅁ, ㅂ). Spaces between words.', confusedWith: ['Japanese', 'Mandarin'],
-    sentences: ["기차역이 어디에 있나요?", "저는 매일 아침 커피를 마셔요.", "오늘 밤 밖이 매우 추워요.", "우리는 이번 주말에 시장에 가요.", "오늘은 아름다운 날입니다.", "지금 몇 시인가요?", "저는 이 문장을 이해하지 못해요.", "이것을 설명해 주시겠어요?", "음식이 정말 맛있어요.", "제 형은 서울에 살아요.", "개가 숲 속을 달리고 있어요.", "우리는 기차를 타야 해요.", "그것은 아주 좋은 질문이네요.", "그녀는 재미있는 책을 읽고 있어요.", "어제 저는 세차를 했어요.", "고양이가 의자 위에서 자고 있어요.", "내일은 비가 올 것 같아요.", "맥주 한 잔 주문하고 싶어요.", "여기에 주차해도 되나요?", "아이들이 정원에서 놀고 있어요."]
+    clue: "Blocky, geometric syllable blocks made of circles (ㅇ), straight lines (ㅣ,ㅡ), and squares (ㅁ,ㅂ). Spaces between words (unlike Japanese/Chinese).", confusedWith: ['Japanese', 'Mandarin'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "오늘 시장이 몇 시에 문을 닫나요?",
+      "할머니는 부산 근처 작은 마을에 살고 계세요.",
+      "이번 주 내내 날씨가 꽤 추웠어요.",
+      "책 세 권을 사고 싶습니다.",
+      "날씨가 좋아서 아이들이 밖에서 놀고 있어요.",
+      "이 근처에 맛있는 식당이 어디 있을까요?",
+      "그녀는 문제를 이해하지 못한다고 말했어요.",
+      "이 오래된 건물은 이백 년 전에 지어졌어요.",
+      // === Category B: Script-showcase (geometric blocks, spacing) ===
+      "쌍쌀한 바람이 불어서 따뜻한 옷을 껴입었습니다.",
+      "서울특별시 강남구 역삼동에서 만나기로 했습니다.",
+      "떡볶이랑 김밥이랑 순대를 포장해 주세요.",
+      "짧은 시간 안에 많은 것을 배울 수 있었습니다.",
+      "형은 쌍둥이 동생과 함께 학교에 다닙니다.",
+      // === Category C: Cultural-distinctive (Korean daily life) ===
+      "퇴근 후에 삼겹살 먹으러 갈까요?",
+      "카카오톡으로 사진 보내 줄 수 있어요?",
+      "오늘 야근해서 집에 늦게 갈 것 같아요.",
+      "편의점에서 삼각김밥이랑 바나나우유 샀어요.",
+      "이번 설날에 고향에 내려갈 계획이에요.",
+      "지하철 환승하는 데 한참 걸렸어요.",
+      "주말에 한강공원에서 치킨 시켜 먹었어요.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "동대문시장에서 겨울옷을 싸게 샀습니다.",
+      "주말에 가족들과 등산을 갔어요.",
+      "오늘은 정말 바쁜 하루였어요.",
+      "아침에 일찍 버스를 탔어요.",
+      "언니가 여행을 갔어요."
+    ]
   },
   {
     id: 'mandarin', name: 'Mandarin', aliases: ['chinese', 'zhongwen', '中文', 'hanyu'], family: 'Sinitic', region: 'Asia', tier: 1, script: 'Han Characters',
-    clue: 'Logographic characters without spacing between words. Highly compact visually.', confusedWith: ['Japanese (Kanji)', 'Cantonese'],
-    sentences: ["请问火车站怎么走？", "我每天早上喜欢喝咖啡。", "今晚外面很冷。", "我们这个周末去市场。", "今天是个美丽的日子。", "现在几点了？", "我不明白这句话。", "你能给我解释一下吗？", "这里的食物真好吃。", "我哥哥住在北京。", "狗在森林里跑。", "我们必须赶上火车。", "这是一个非常好的问题。", "她正在读一本有趣的书。", "昨天我洗了我的车。", "猫在椅子上睡觉。", "明天可能会下雨。", "我想点一杯啤酒。", "我可以在哪里停车？", "孩子们在花园里玩耍。"]
+    clue: "Dense logographic characters with no spaces between words. No phonetic alphabet mixed in (unlike Japanese). Characters are square-shaped and evenly spaced.", confusedWith: ['Japanese (Kanji)', 'Cantonese'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "今天市场几点关门？",
+      "我奶奶住在杭州附近的一个小村子里。",
+      "这个星期天气一直都很冷。",
+      "我想买三本书。",
+      "天气好，孩子们在外面玩。",
+      "这附近哪里有好吃的餐厅？",
+      "她跟我说她不明白这个问题。",
+      "这栋老建筑是两百年前建的。",
+      // === Category B: Script-showcase (dense characters, no spaces, no kana) ===
+      "中国的高速铁路网络覆盖了全国大部分主要城市。",
+      "昨天下午我在图书馆里看了三个小时的历史书。",
+      "这家饭店的红烧肉做得特别地道。",
+      "街道两旁种满了梧桐树，秋天的时候特别漂亮。",
+      "他每天早上六点钟起床跑步锻炼身体。",
+      // === Category C: Cultural-distinctive (Chinese daily life) ===
+      "早上在小区门口买了两个包子和一杯豆浆。",
+      "春节快到了，我还没买到回家的火车票。",
+      "今天加班到九点，外卖都凉了。",
+      "手机没流量了，得去充话费。",
+      "广场舞的音乐每天晚上七点准时响起。",
+      "快递放在楼下的快递柜里了，记得去取。",
+      "周末去了趟宜家，人多得根本走不动。",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "故宫博物院每天限制八万人参观。",
+      "我每天坐地铁上下班。",
+      "这不是一个好主意。",
+      "他今天早上坐火车走了。",
+      "我姐姐去旅行了。"
+    ]
   },
   {
-    id: 'arabic', name: 'Arabic', aliases: ['arabiyyah'], family: 'Semitic', region: 'Middle East/Africa', tier: 1, script: 'Arabic',
-    clue: 'Written right-to-left. Cursive flowing script with various dots positioned above or below sweeping lines.', confusedWith: ['Persian', 'Urdu'],
-    sentences: ["أين محطة القطار من فضلك؟", "أحب شرب القهوة في الصباح كثيراً.", "الجو بارد جداً في الخارج الليلة.", "نذهب إلى السوق هذا الأسبوع.", "إنه يوم جميل اليوم.", "كم الساعة الآن؟", "أنا لا أفهم هذه الجملة.", "هل يمكنك شرح ذلك لي؟", "الطعام لذيذ جداً.", "أخي يعيش في القاهرة.", "الكلب يركض في الغابة.", "يجب أن نلحق بالقطار.", "هذا سؤال جيد جداً.", "هي تقرأ كتاباً مثيراً للاهتمام.", "لقد غسلت سيارتي أمس.", "القطة نائمة على الكرسي.", "من المحتمل أن تمطر غداً.", "أود أن أطلب بيرة.", "أين يمكنني ركن سيارتي هنا؟", "الأطفال يلعبون في الحديقة."]
+    id: 'arabic', name: 'Arabic', aliases: ['arabiyyah', 'العربية'], family: 'Semitic', region: 'Middle East/Africa', tier: 1, script: 'Arabic',
+    clue: "Written right-to-left. Flowing cursive script with dots above/below letters (ب,ت,ث,ن). Letters change shape depending on position in word.", confusedWith: ['Persian', 'Urdu'],
+    sentences: [
+      // === Category A: Template sentences ===
+      "متى يغلق السوق اليوم؟",
+      "جدتي تعيش في قرية صغيرة بالقرب من دمشق.",
+      "كان الطقس بارداً طوال هذا الأسبوع.",
+      "أريد أن أشتري ثلاثة كتب من فضلك.",
+      "الأطفال يلعبون في الخارج لأن الجو جميل.",
+      "أين يمكن أن أجد مطعماً جيداً هنا؟",
+      "قالت لي إنها لا تفهم المشكلة.",
+      "هذا المبنى القديم بُني قبل مئتي عام.",
+      // === Category B: Script-showcase (dot patterns, connected letters, shapes) ===
+      "المكتبة العامة تستقبل الزوار يومياً من التاسعة صباحاً حتى الثامنة مساءً.",
+      "الطبيب نصحني بالمشي ثلاثين دقيقة يومياً للحفاظ على صحتي.",
+      "اشتريت بطاقة للحافلة من محطة النقل العام.",
+      "الحديقة العامة مليئة بالأشجار والزهور في فصل الربيع.",
+      "تعلّمت الطبخ من جدتي عندما كنت صغيراً.",
+      // === Category C: Cultural-distinctive (Arabic daily life) ===
+      "هل تريد أن تشرب قهوة عربية مع الهيل؟",
+      "الأذان يُسمع من المسجد خمس مرات في اليوم.",
+      "في رمضان نجتمع العائلة كلها على الإفطار.",
+      "الحر شديد اليوم، درجة الحرارة تجاوزت الأربعين.",
+      "أمي تحضّر المنسف في كل مناسبة عائلية.",
+      "السوق القديم مليء بالبهارات والعطور والأقمشة.",
+      "نشرب الشاي بالنعناع بعد كل وجبة غداء.",
+      // === Category D: Difficulty-graded (D1=obvious → D5=confusable) ===
+      "الجامعة تقع في وسط المدينة بجانب المستشفى الكبير.",
+      "أخي يعمل في مكتب قريب من البيت.",
+      "لا أعتقد أن هذه فكرة جيدة.",
+      "ركب القطار هذا الصباح.",
+      "أختي سافرت أمس."
+    ]
   },
   {
     id: 'hindi', name: 'Hindi', aliases: ['hindustani'], family: 'Indo-Aryan', region: 'Asia', tier: 2, script: 'Devanagari',
