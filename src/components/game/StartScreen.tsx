@@ -20,7 +20,7 @@ export function StartScreen() {
   return (
     <div className="start-screen">
       <div className="start-intro">
-        <h2>Pick Justins challenge</h2>
+        <h2>Pick a challenge</h2>
         <p>Read a snippet, identify the language. Earn streaks, master tongues, climb tiers.</p>
       </div>
 
