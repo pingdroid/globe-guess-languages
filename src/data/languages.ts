@@ -1032,9 +1032,6 @@ export const languages: Language[] = [
     confusedWith: ['Russian', 'Kazakh', 'Bashkir'],
     sentences: ["Бүген базар ничә сәгатьтә ябыла?", "Минем әбием Казанга якын бер кечкенә авылда яши.", "Атна буе һава торышы бик салкын булды.", "Өч китап сатып алырга телим.", "Балалар тышта уйный, чөнки һава яхшы.", "Бу тирәдә яхшы ресторан кайда табып була?", "Ул миңа проблеманы аңламый дип әйтте.", "Бу иске бина ике йөз ел элек салынган.", "Казан Кремле Татарстанның иң мәшһүр урыны.", "Өчпочмак һәм чәк-чәк безнең милли ашларыбыз.", "Сабантуйда көрәш һәм ат чабышы була.", "Автобус егерме минут соңга калды.", "Казан арты урманнарында гөмбә җыйганда бик рәхәт.", "Әни һәр якшәмбедә бәлеш пешерә.", "Кышын бик салкын, карлар күп яуа.", "Чәй эчү безнең гадәтебез, чәй белән бавырсак.", "Нарат урманнарында сәяхәт итү бик матур.", "Идел елгасы Казан шәһәре аша ага.", "Мәчет минаредан азан ишетелә.", "Җәй көне Казанда ак төннәр була.", "Дарүханә почта каршысында бүген ябык.", "Бабам яшь чагында икмәк пешерү цехында эшләгән.", "Бу яхшы фикер икәненә ышанмыйм.", "Ул иртән поездга утырды.", "Апам ялга китте."]
   },
- {
-  const tierSet = new Set(tiers);
-  return languages.filter(l => tierSet.has(l.tier));
   {
     id: 'irish', name: 'Irish', aliases: ['gaeilge', 'irish gaelic'], family: 'Celtic', region: 'Europe', tier: 4, script: 'Latin',
     clue: "Séimhiú (lenition) adds h after consonants: bh, ch, dh, fh, gh, mh, ph, sh, th. Accent only on vowels (á, é, í, ó, ú). No j, k, q, w, x, y, z.",
@@ -1069,5 +1066,7 @@ export function getLanguageIds(): string[] {
   return languages.map(l => l.id);
 }
 
-export function getLanguagesByTiers(tiers: number[]): Language[]
+export function getLanguagesByTiers(tiers: number[]): Language[] {
+  const tierSet = new Set(tiers);
+  return languages.filter(l => tierSet.has(l.tier));
 }
