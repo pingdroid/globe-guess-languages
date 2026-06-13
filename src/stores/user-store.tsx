@@ -83,11 +83,15 @@
       try {
         const remote = await fetchRemoteStats(u.id);
         const localRaw = localStorage.getItem('languess_stats_v1');
+        const alreadySynced = localStorage.getItem('languess_synced_' + u.id);
         const local = localRaw ? JSON.parse(localRaw) : null;
-        if (local && !remote) {
+
+        if (local && !remote && !alreadySynced) {
+          // First sign-in ever: push local guest stats to remote
           await upsertRemoteStats(u.id, local);
           localStorage.setItem('languess_stats_v1', JSON.stringify(local));
-        } else if (local && remote) {
+        } else if (local && remote && !alreadySynced) {
+          // First sign-in with existing remote: merge once
           const merged = { ...remote };
           merged.games = (remote.games ?? 0) + (local.games ?? 0);
           merged.wins = (remote.wins ?? 0) + (local.wins ?? 0);
@@ -101,8 +105,11 @@
           await upsertRemoteStats(u.id, merged);
           localStorage.setItem('languess_stats_v1', JSON.stringify(merged));
         } else if (remote) {
+          // Already synced or no local: just use remote as truth
           localStorage.setItem('languess_stats_v1', JSON.stringify(remote));
         }
+        // Mark this user as synced so we don't double-merge on next sign-in
+        localStorage.setItem('languess_synced_' + u.id, '1');
       } catch (e) {
         console.error('merge failed', e);
       }
@@ -118,7 +125,12 @@
     }
 
     async function signOut() {
+      const currentUser = user;
       await supabase.auth.signOut();
+      // Clear sync flag so next sign-in with new guest stats triggers merge
+      if (currentUser?.id) localStorage.removeItem('languess_synced_' + currentUser.id);
+      // Clear stats so guest mode starts fresh (not showing old account stats)
+      localStorage.removeItem('languess_stats_v1');
       setUser(null);
       setIsGuest(true);
       setStatsAdapter({
