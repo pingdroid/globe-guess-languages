@@ -8,7 +8,9 @@ import { PlayScreen } from './PlayScreen';
 import { EndScreen } from './EndScreen';
 
 function StatsBar() {
-  const stats = useStats();
+  const { state } = useGame();
+  // Re-read stats whenever phase changes (especially after won/lost writes new stats)
+  const stats = useStats(state.phase);
   return (
     <div className="stats-bar">
       <div className="stat-item"><span className="stat-val">{stats.games}</span><span className="stat-label">Games</span></div>

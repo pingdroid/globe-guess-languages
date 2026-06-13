@@ -155,6 +155,6 @@ export function useGame() {
   return ctx;
 }
 
-export function useStats() {
+export function useStats(_dep?: any) {
   return getDerivedStats(loadStats());
 }
