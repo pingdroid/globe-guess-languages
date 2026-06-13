@@ -1,7 +1,8 @@
 import { GameProvider, useGame, useStats } from '../../stores/game-store';
+import { getDerivedStats, loadStats } from '../../engine/game-engine';
 import AuthModal from '../auth/AuthModal';
 import ProfileMenu from '../auth/ProfileMenu';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '../../stores/user-store';
 import { StartScreen } from './StartScreen';
 import { PlayScreen } from './PlayScreen';
@@ -9,8 +10,13 @@ import { EndScreen } from './EndScreen';
 
 function StatsBar() {
   const { state } = useGame();
-  // Re-read stats whenever phase changes (especially after won/lost writes new stats)
-  const stats = useStats(state.phase);
+  const [stats, setStats] = useState(getDerivedStats(loadStats()));
+
+  // Re-read stats when phase changes (after game ends and stats are written)
+  useEffect(() => {
+    setStats(getDerivedStats(loadStats()));
+  }, [state.phase]);
+
   return (
     <div className="stats-bar">
       <div className="stat-item"><span className="stat-val">{stats.games}</span><span className="stat-label">Games</span></div>
