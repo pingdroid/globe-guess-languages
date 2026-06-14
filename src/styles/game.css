@@ -562,3 +562,89 @@
 .ch-item-status { margin-left: auto; }
 .ch-item-scores { display: flex; flex-direction: column; gap: 2px; font-size: 0.8rem; color: #aaa; }
 .ch-item-waiting { color: #fade2a; font-style: italic; }
+
+/* ── Phase: UX polish improvements ── */
+
+/* AuthModal: close button, field labels, error, guest button */
+.auth-modal { position: relative; }
+.auth-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+  color: var(--ink); font-size: 1.2rem; line-height: 1; cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .2s, border-color .2s;
+}
+.auth-modal-close:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.18); }
+.auth-field-label {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); margin: 8px 0 4px;
+}
+.auth-field-label:first-of-type { margin-top: 0; }
+.auth-error {
+  background: var(--danger-soft); border: 1px solid rgba(255,93,122,.35);
+  color: var(--danger); border-radius: 10px; padding: 10px 12px;
+  font-size: 13px; margin-top: 4px;
+  animation: dropdownIn .18s var(--ease) both;
+}
+.auth-submit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none !important; }
+.auth-guest-btn {
+  margin-top: 12px; width: 100%; padding: 11px 16px; border-radius: 12px;
+  background: rgba(255,255,255,.04); color: var(--ink);
+  border: 1px solid rgba(255,255,255,.12);
+  font-weight: 600; font-size: 14px; font-family: inherit; cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.auth-guest-btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+.auth-modal-footer { justify-content: center; margin-top: 12px; }
+
+/* Empty Personal Best state */
+.diff-meta-value.empty { color: var(--muted); font-size: 1rem; font-weight: 600; }
+
+/* Start screen secondary actions row */
+.start-secondary-row {
+  display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px;
+  align-items: stretch;
+}
+.start-secondary-row .action-btn { padding: 12px 14px; font-size: .78rem; letter-spacing: .1em; }
+.action-btn.ghost {
+  background: transparent; color: var(--ink-dim);
+  border: 1px solid rgba(255,255,255,.08); box-shadow: none;
+}
+.action-btn.ghost:hover { background: rgba(255,255,255,.04); color: var(--ink); }
+
+/* Footer links: inline row, comfortable tap targets */
+.start-footer-links {
+  display: flex; align-items: center; justify-content: center;
+  gap: 4px; margin-top: 6px; padding: 4px 0;
+}
+.start-footer-links .how-to-play-link {
+  margin: 0; padding: 12px 16px; min-height: 44px; display: inline-flex; align-items: center;
+}
+.footer-link-sep { color: rgba(255,255,255,.25); }
+
+/* Hint badge subtle in animation */
+.hint-badge { animation: dropdownIn .25s var(--ease) both; }
+
+/* Difficulty card: stack meta below body on small screens */
+@media (max-width: 520px) {
+  .diff-select-btn { flex-wrap: wrap; gap: 10px 14px; }
+  .diff-meta {
+    min-width: 0; width: 100%; flex-direction: row;
+    align-items: center; justify-content: space-between;
+    padding-top: 8px; border-top: 1px dashed rgba(255,255,255,.08);
+    order: 3;
+  }
+  .diff-meta-label { font-size: .58rem; }
+  .diff-meta-value { font-size: 1.05rem; }
+  .diff-arrow { display: none; }
+  .start-secondary-row { grid-template-columns: 1fr 1fr; }
+  .start-secondary-row > :nth-child(3) { grid-column: 1 / -1; }
+}
+
+/* StatsBar: legible labels on narrow screens */
+@media (max-width: 380px) {
+  .stat-label { font-size: .5rem; letter-spacing: .1em; }
+  .stat-val { font-size: 1rem; }
+}

@@ -31,22 +31,9 @@ export function StartScreen() {
     <div className="start-screen">
       <DailyChallengeCard onPlay={() => dispatch({ type: 'START_DAILY' })} onArchive={() => setShowCalendar(true)} />
 
-      <button type="button" className="action-btn challenge-friend-btn" onClick={() => setShowChallengeSetup(true)}>
-        ⚔️ Challenge a Friend
-      </button>
-      <button type="button" className="how-to-play-link" onClick={() => setShowHistory(true)}>
-        📜 Challenge History
-      </button>
-
       <div className="start-intro">
         <h2>Pick a challenge</h2>
         <p>Read a snippet, identify the language. Earn streaks, master tongues, climb tiers.</p>
-      </div>
-
-      <div className="start-high-scores">
-        <button type="button" className="action-btn high-scores-panel-btn" onClick={() => setShowHighScores(true)}>
-          View high scores
-        </button>
       </div>
 
       <div className="start-menu">
@@ -64,7 +51,9 @@ export function StartScreen() {
               </div>
               <div className="diff-meta">
                 <div className="diff-meta-label">Personal Best</div>
-                <div className="diff-meta-value">{personalBest !== null ? formatElapsedTime(personalBest) : '--:--'}</div>
+                <div className={`diff-meta-value${personalBest === null ? ' empty' : ''}`}>
+                  {personalBest !== null ? formatElapsedTime(personalBest) : 'Not yet'}
+                </div>
                 <div className="diff-meta-subtext">{stats.winsByDifficulty[d.key]} wins</div>
               </div>
               <div className="diff-arrow">›</div>
@@ -73,12 +62,27 @@ export function StartScreen() {
         })}
       </div>
 
-      <button type="button" className="how-to-play-link" onClick={() => setShowHowToPlay(true)}>
-        How to play
-      </button>
-      <button type="button" className="how-to-play-link" onClick={() => setShowPrivacy(true)}>
-        Privacy policy
-      </button>
+      <div className="start-secondary-row">
+        <button type="button" className="action-btn secondary challenge-friend-btn" onClick={() => setShowChallengeSetup(true)}>
+          ⚔️ Challenge a Friend
+        </button>
+        <button type="button" className="action-btn secondary" onClick={() => setShowHighScores(true)}>
+          🏆 High Scores
+        </button>
+        <button type="button" className="action-btn ghost" onClick={() => setShowHistory(true)}>
+          📜 History
+        </button>
+      </div>
+
+      <div className="start-footer-links">
+        <button type="button" className="how-to-play-link" onClick={() => setShowHowToPlay(true)}>
+          How to play
+        </button>
+        <span className="footer-link-sep" aria-hidden="true">·</span>
+        <button type="button" className="how-to-play-link" onClick={() => setShowPrivacy(true)}>
+          Privacy policy
+        </button>
+      </div>
 
       {showHistory && !viewingResult && <ChallengeHistory
         onViewResult={(config) => { setShowHistory(false); setViewingResult(config); }}

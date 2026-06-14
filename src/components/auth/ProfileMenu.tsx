@@ -30,7 +30,13 @@ export default function ProfileMenu() {
           <span>Guest Mode</span>
         </div>
       ) : (
-        <button onClick={() => setOpen(s => !s)} className="profile-pill profile-btn">
+        <button
+          onClick={() => setOpen(s => !s)}
+          className="profile-pill profile-btn"
+          aria-label={`Account menu for ${displayName ?? 'signed in user'}`}
+          aria-haspopup="menu"
+          aria-expanded={open}
+        >
           <Avatar email={user?.email} username={user?.username} />
           <span className="profile-pill-email">{displayName}</span>
         </button>
