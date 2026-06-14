@@ -541,3 +541,24 @@
   font-size: 0.75rem;
   color: #5794f2;
 }
+
+/* ── Challenge History ── */
+.challenge-history-modal { max-width: 420px; }
+.challenge-history-list { display: flex; flex-direction: column; gap: 8px; max-height: 400px; overflow-y: auto; }
+.challenge-history-item {
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.challenge-history-item:hover { border-color: #5794f2; }
+.challenge-history-item.completed { border-left: 3px solid #73bf69; }
+.challenge-history-item.waiting { border-left: 3px solid #fade2a; }
+.ch-item-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.ch-item-diff { font-weight: 600; font-size: 0.85rem; text-transform: capitalize; }
+.ch-item-date { font-size: 0.75rem; color: #888; }
+.ch-item-status { margin-left: auto; }
+.ch-item-scores { display: flex; flex-direction: column; gap: 2px; font-size: 0.8rem; color: #aaa; }
+.ch-item-waiting { color: #fade2a; font-style: italic; }

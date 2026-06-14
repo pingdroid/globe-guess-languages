@@ -5,6 +5,8 @@ import { HighScoresModal } from './HighScoresModal';
 import { DailyChallengeCard } from './DailyChallengeCard';
 import { DailyChallengeCalendar } from './DailyChallengeCalendar';
 import { FriendChallengeSetup } from './FriendChallengeSetup';
+import { ChallengeHistory } from './ChallengeHistory';
+import { FriendChallengeResult } from './FriendChallengeResult';
 import { type ChallengeConfig } from '../../engine/friend-challenge';
 
 const diffOptions: Array<{ key: DifficultyKey; icon: string; title: string; tag: string; desc: string }> = [
@@ -22,6 +24,8 @@ export function StartScreen() {
   const [showHighScores, setShowHighScores] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showChallengeSetup, setShowChallengeSetup] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [viewingResult, setViewingResult] = useState<any>(null);
 
   return (
     <div className="start-screen">
@@ -29,6 +33,9 @@ export function StartScreen() {
 
       <button type="button" className="action-btn challenge-friend-btn" onClick={() => setShowChallengeSetup(true)}>
         ⚔️ Challenge a Friend
+      </button>
+      <button type="button" className="how-to-play-link" onClick={() => setShowHistory(true)}>
+        📜 Challenge History
       </button>
 
       <div className="start-intro">
@@ -72,6 +79,25 @@ export function StartScreen() {
       <button type="button" className="how-to-play-link" onClick={() => setShowPrivacy(true)}>
         Privacy policy
       </button>
+
+      {showHistory && !viewingResult && <ChallengeHistory
+        onViewResult={(config) => { setShowHistory(false); setViewingResult(config); }}
+        onClose={() => setShowHistory(false)}
+      />}
+
+      {viewingResult && <div className="how-to-play-overlay" onClick={() => setViewingResult(null)}>
+        <div className="how-to-play-modal" onClick={e => e.stopPropagation()}>
+          <button type="button" className="how-to-play-close" onClick={() => setViewingResult(null)}>×</button>
+          <FriendChallengeResult
+            challenge={viewingResult}
+            myScore={viewingResult.creatorScore ?? 0}
+            myAccuracy={viewingResult.creatorAccuracy ?? 0}
+            myTimeMs={viewingResult.creatorTimeMs ?? 0}
+            isCreator={true}
+            onMenu={() => setViewingResult(null)}
+          />
+        </div>
+      </div>}
 
       {showChallengeSetup && <FriendChallengeSetup
         onStart={(id, seed, diff, tiers, roundCount, wrongLimit, config) => {
