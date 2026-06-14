@@ -63,13 +63,13 @@ export function StartScreen() {
       </div>
 
       <div className="start-secondary-row">
-        <button type="button" className="action-btn secondary challenge-friend-btn" onClick={() => setShowChallengeSetup(true)}>
+        <button type="button" className="action-btn secondary" onClick={() => setShowChallengeSetup(true)}>
           ⚔️ Challenge a Friend
         </button>
         <button type="button" className="action-btn secondary" onClick={() => setShowHighScores(true)}>
           🏆 High Scores
         </button>
-        <button type="button" className="action-btn ghost" onClick={() => setShowHistory(true)}>
+        <button type="button" className="action-btn secondary" onClick={() => setShowHistory(true)}>
           📜 History
         </button>
       </div>
