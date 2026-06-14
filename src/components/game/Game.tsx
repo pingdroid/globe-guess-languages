@@ -65,6 +65,7 @@ function ChallengeLoader({ challengeId, onLoaded }: { challengeId: string; onLoa
 
 function GameRouter() {
   const { state, dispatch } = useGame();
+  const { user } = useUser();
 
   switch (state.phase) {
     case 'menu':
@@ -81,7 +82,7 @@ function GameRouter() {
         if (state.isCreator) {
           submitCreatorResult(state.challengeId, score.score, score.accuracy, score.timeMs);
         } else {
-          submitChallengerResult(state.challengeId, score.score, score.accuracy, score.timeMs, 'Friend');
+          submitChallengerResult(state.challengeId, score.score, score.accuracy, score.timeMs, user?.username || user?.email || 'Guest');
         }
         return <FriendChallengeResult
           challenge={state.challengeConfig}
