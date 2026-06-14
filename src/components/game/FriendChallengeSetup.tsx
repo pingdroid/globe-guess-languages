@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { createChallenge, getChallengeUrl, type ChallengeConfig } from '../../engine/friend-challenge';
 import { type DifficultyKey } from '../../engine/game-engine';
 import { useUser } from '../../stores/user-store';
@@ -27,7 +28,7 @@ export function FriendChallengeSetup({ onStart, onClose }: Props) {
     if (challenge) {
       setCreated(challenge);
     } else {
-      alert('Failed to create challenge. Check your connection.');
+      toast.error('Failed to create challenge. Check your connection.');
     }
     setLoading(false);
   };
@@ -42,11 +43,13 @@ export function FriendChallengeSetup({ onStart, onClose }: Props) {
       } else {
         await navigator.clipboard.writeText(url);
         setCopied(true);
+        toast.success('Challenge link copied to clipboard');
         setTimeout(() => setCopied(false), 2000);
       }
     } catch {
       await navigator.clipboard.writeText(url);
       setCopied(true);
+      toast.success('Challenge link copied to clipboard');
       setTimeout(() => setCopied(false), 2000);
     }
   };
