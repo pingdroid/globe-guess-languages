@@ -445,3 +445,58 @@
 .cal-dot.completed { background: #1a3a2a; border: 1px solid #73bf69; }
 .cal-dot.today { background: #1a2a3a; border: 1px solid #e94560; }
 .cal-dot.available { background: #1a2a3a; border: 1px solid #444; }
+
+/* ── Mobile fixes for difficulty buttons ── */
+@media (max-width: 480px) {
+  .diff-select-btn {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+  .diff-meta {
+    min-width: unset;
+    width: 100%;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #333;
+  }
+  .diff-meta-label {
+    font-size: 0.7rem;
+  }
+  .diff-meta-value {
+    font-size: 0.85rem;
+  }
+  .diff-meta-subtext {
+    font-size: 0.7rem;
+  }
+  .diff-body {
+    min-width: 0;
+    flex: 1;
+  }
+  .diff-title-row {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .diff-tag {
+    font-size: 0.7rem;
+  }
+  .diff-desc {
+    font-size: 0.75rem;
+  }
+  .diff-arrow {
+    display: none;
+  }
+  .daily-challenge-card {
+    padding: 12px 14px;
+  }
+  .daily-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .daily-streak {
+    margin-left: 0;
+    width: 100%;
+  }
+}
