@@ -26,7 +26,7 @@ export default function AuthModal({ onClose }: { onClose?: () => void }) {
     setSubmitting(true);
     try {
       if (mode === 'signin') await signIn(email, password);
-      else await signUp(email, password);
+      else await signUp(email, password, email.split('@')[0] || 'player');
       toast.success(mode === 'signin' ? 'Welcome back!' : 'Account created');
       onClose?.();
     } catch (err: any) {
