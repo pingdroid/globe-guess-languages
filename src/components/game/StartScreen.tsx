@@ -4,6 +4,8 @@ import { formatElapsedTime, type DifficultyKey } from '../../engine/game-engine'
 import { HighScoresModal } from './HighScoresModal';
 import { DailyChallengeCard } from './DailyChallengeCard';
 import { DailyChallengeCalendar } from './DailyChallengeCalendar';
+import { FriendChallengeSetup } from './FriendChallengeSetup';
+import { type ChallengeConfig } from '../../engine/friend-challenge';
 
 const diffOptions: Array<{ key: DifficultyKey; icon: string; title: string; tag: string; desc: string }> = [
   { key: 'easy', icon: '🌱', title: 'Easy', tag: '5 to win · 3 lives', desc: 'Multiple choice. Common languages. Regional hints on.' },
@@ -19,10 +21,15 @@ export function StartScreen() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showHighScores, setShowHighScores] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [showChallengeSetup, setShowChallengeSetup] = useState(false);
 
   return (
     <div className="start-screen">
       <DailyChallengeCard onPlay={() => dispatch({ type: 'START_DAILY' })} onArchive={() => setShowCalendar(true)} />
+
+      <button type="button" className="action-btn challenge-friend-btn" onClick={() => setShowChallengeSetup(true)}>
+        ⚔️ Challenge a Friend
+      </button>
 
       <div className="start-intro">
         <h2>Pick a challenge</h2>
@@ -65,6 +72,14 @@ export function StartScreen() {
       <button type="button" className="how-to-play-link" onClick={() => setShowPrivacy(true)}>
         Privacy policy
       </button>
+
+      {showChallengeSetup && <FriendChallengeSetup
+        onStart={(id, seed, diff, tiers, roundCount, wrongLimit) => {
+          setShowChallengeSetup(false);
+          dispatch({ type: 'START_CHALLENGE', challengeId: id, seed, difficulty: diff, tiers, roundCount, wrongLimit, isCreator: true, challengeConfig: { id, seed, difficulty: diff, roundCount, wrongLimit, tiers, createdByName: 'You' } as ChallengeConfig });
+        }}
+        onClose={() => setShowChallengeSetup(false)}
+      />}
 
       {showCalendar && <DailyChallengeCalendar
         onSelectDate={(date) => { setShowCalendar(false); dispatch({ type: 'START_DAILY', date }); }}

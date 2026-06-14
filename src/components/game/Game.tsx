@@ -9,6 +9,8 @@ import { StartScreen } from './StartScreen';
 import { PlayScreen } from './PlayScreen';
 import { EndScreen } from './EndScreen';
 import { DailyChallengeResult } from './DailyChallengeResult';
+import { FriendChallengeResult } from './FriendChallengeResult';
+import { fetchChallenge, submitCreatorResult, submitChallengerResult } from '../../engine/friend-challenge';
 
 function StatsBar() {
   const { state } = useGame();
@@ -47,6 +49,20 @@ function Header() {
   );
 }
 
+function ChallengeLoader({ challengeId, onLoaded }: { challengeId: string; onLoaded: () => void }) {
+  const { dispatch } = useGame();
+  useEffect(() => {
+    (async () => {
+      const config = await fetchChallenge(challengeId);
+      if (config) {
+        dispatch({ type: 'START_CHALLENGE', challengeId: config.id, seed: config.seed, difficulty: config.difficulty as any, tiers: config.tiers, roundCount: config.roundCount, wrongLimit: config.wrongLimit, isCreator: false, challengeConfig: config });
+        onLoaded();
+      }
+    })();
+  }, [challengeId]);
+  return <div className="end-screen"><div className="end-icon">⚔️</div><div className="end-title">Loading challenge...</div></div>;
+}
+
 function GameRouter() {
   const { state, dispatch } = useGame();
 
@@ -59,6 +75,23 @@ function GameRouter() {
       return <PlayScreen />;
     case 'won':
     case 'lost':
+      if (state.challengeId && state.challengeConfig && state.dailyScore) {
+        // Submit result to Supabase
+        const score = state.dailyScore;
+        if (state.isCreator) {
+          submitCreatorResult(state.challengeId, score.score, score.accuracy, score.timeMs);
+        } else {
+          submitChallengerResult(state.challengeId, score.score, score.accuracy, score.timeMs, 'Friend');
+        }
+        return <FriendChallengeResult
+          challenge={state.challengeConfig}
+          myScore={score.score}
+          myAccuracy={score.accuracy}
+          myTimeMs={score.timeMs}
+          isCreator={state.isCreator}
+          onMenu={() => dispatch({ type: 'QUIT' })}
+        />;
+      }
       if (state.isDaily && state.dailyScore) {
         return <DailyChallengeResult
           score={state.dailyScore}
@@ -73,7 +106,19 @@ function GameRouter() {
 export function Game() {
   const { initialized, isGuest } = useUser();
   const [dismissed, setDismissed] = useState(false);
-  const showAuthModal = initialized && isGuest && !dismissed;
+  const [pendingChallenge, setPendingChallenge] = useState<string | null>(null);
+  const showAuthModal = initialized && isGuest && !dismissed && !pendingChallenge;
+
+  // Check for challenge URL on mount
+  useEffect(() => {
+    const id = (window as any).__pendingChallenge;
+    if (id) {
+      delete (window as any).__pendingChallenge;
+      setPendingChallenge(id);
+      // Clean URL
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   return (
     <GameProvider>
@@ -81,7 +126,11 @@ export function Game() {
         {showAuthModal && <AuthModal onClose={() => setDismissed(true)} />}
         <Header />
         <StatsBar />
-        <GameRouter />
+        {pendingChallenge ? (
+          <ChallengeLoader challengeId={pendingChallenge} onLoaded={() => setPendingChallenge(null)} />
+        ) : (
+          <GameRouter />
+        )}
       </div>
     </GameProvider>
   );
