@@ -74,9 +74,9 @@ export function StartScreen() {
       </button>
 
       {showChallengeSetup && <FriendChallengeSetup
-        onStart={(id, seed, diff, tiers, roundCount, wrongLimit) => {
+        onStart={(id, seed, diff, tiers, roundCount, wrongLimit, config) => {
           setShowChallengeSetup(false);
-          dispatch({ type: 'START_CHALLENGE', challengeId: id, seed, difficulty: diff, tiers, roundCount, wrongLimit, isCreator: true, challengeConfig: { id, seed, difficulty: diff, roundCount, wrongLimit, tiers, createdByName: 'You' } as ChallengeConfig });
+          dispatch({ type: 'START_CHALLENGE', challengeId: id, seed, difficulty: diff, tiers, roundCount, wrongLimit, isCreator: true, challengeConfig: config });
         }}
         onClose={() => setShowChallengeSetup(false)}
       />}

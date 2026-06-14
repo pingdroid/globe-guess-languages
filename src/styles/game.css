@@ -527,3 +527,17 @@
 .challenge-vs { font-size: 1.2rem; font-weight: 700; color: #e94560; }
 .challenge-winner { font-size: 1.1rem; font-weight: 700; color: #73bf69; text-align: center; margin: 8px 0 16px; }
 .challenge-waiting { text-align: center; color: #888; font-size: 0.85rem; margin: 12px 0; }
+
+.challenge-link-box {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 16px 0;
+  text-align: center;
+  word-break: break-all;
+}
+.challenge-link-box code {
+  font-size: 0.75rem;
+  color: #5794f2;
+}
