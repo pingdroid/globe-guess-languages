@@ -604,10 +604,12 @@
 
 /* Start screen secondary actions row */
 .start-secondary-row {
-  display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
   align-items: stretch;
+  max-width: 100%;
+  margin-top: 12px;
 }
-.start-secondary-row .action-btn { padding: 12px 14px; font-size: .78rem; letter-spacing: .1em; }
+.start-secondary-row .action-btn { padding: 14px 12px; font-size: .78rem; letter-spacing: .05em; text-align: center; }
 .action-btn.ghost {
   background: transparent; color: var(--ink-dim);
   border: 1px solid rgba(255,255,255,.08); box-shadow: none;
