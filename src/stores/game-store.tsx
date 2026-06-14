@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
 import { type DifficultyConfig, type DifficultyKey, DIFFICULTIES, pickLanguage, pickSentence, pickDistractors, isFuzzyMatch, recordGame, loadStats, getDerivedStats } from '../engine/game-engine';
+import { generateDailyChallenge, computeDailyScore, saveDailyResult, DAILY_CONFIG, type DailyChallenge, type DailyScore } from '../engine/daily-challenge';
 import { getLanguageById, getLanguagesByTiers } from '../data/languages';
 
 // ── Types ──
@@ -22,10 +23,15 @@ interface GameState {
   runStartAt: number | null;
   finalTimeMs: number | null;
   newPersonalBest: boolean;
+  isDaily: boolean;
+  dailyChallenge: DailyChallenge | null;
+  dailyRoundIndex: number;
+  dailyScore: DailyScore | null;
 }
 
 type Action =
   | { type: 'START_GAME'; difficulty: DifficultyKey }
+  | { type: 'START_DAILY' }
   | { type: 'NEXT_ROUND' }
   | { type: 'GUESS'; guessValue: string; inputMode: 'buttons' | 'text' }
   | { type: 'LOSS_TIMEOUT' }
@@ -40,6 +46,10 @@ const initialState: GameState = {
   runStartAt: null,
   finalTimeMs: null,
   newPersonalBest: false,
+  isDaily: false,
+  dailyChallenge: null,
+  dailyRoundIndex: 0,
+  dailyScore: null,
 };
 
 function setupRound(state: GameState): GameState {
@@ -88,8 +98,26 @@ function reducer(state: GameState, action: Action): GameState {
       };
       return setupRound(fresh);
     }
-    case 'NEXT_ROUND':
+    case 'NEXT_ROUND': {
+      if (state.isDaily && state.dailyChallenge) {
+        const nextIdx = state.dailyRoundIndex + 1;
+        if (nextIdx >= state.dailyChallenge.rounds.length) return state;
+        const round = state.dailyChallenge.rounds[nextIdx];
+        const lang = getLanguageById(round.langId)!;
+        const sentence = lang.sentences[round.sentenceIndex];
+        const options = [...round.distractorIds, round.langId].sort(() => Math.random() - 0.5);
+        return {
+          ...state,
+          phase: 'playing' as Phase,
+          currentLangId: round.langId,
+          currentSentence: sentence,
+          options,
+          lastGuessCorrect: null,
+          dailyRoundIndex: nextIdx,
+        };
+      }
       return setupRound(state);
+    }
     case 'GUESS': {
       const cfg = state.cfg!;
       const correctLang = getLanguageById(state.currentLangId!)!;
@@ -112,11 +140,21 @@ function reducer(state: GameState, action: Action): GameState {
       if (correctCount >= cfg.winTarget) {
         phase = 'won';
         finalTimeMs = completionTimeMs ?? null;
+        if (state.isDaily) {
+          const dailyScore = computeDailyScore(correctCount, wrongCount, completionTimeMs ?? 0);
+          saveDailyResult(dailyScore);
+          return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats, runStartAt: null, finalTimeMs, newPersonalBest: false, dailyScore };
+        }
         const result = recordGame(true, state.difficulty!, correctCount, wrongCount, langStats, completionTimeMs);
         newPersonalBest = result.newPersonalBest;
       } else if (wrongCount >= cfg.wrongLimit) {
         phase = 'final-loss-revealed';
         finalTimeMs = completionTimeMs ?? null;
+        if (state.isDaily) {
+          const dailyScore = computeDailyScore(correctCount, wrongCount, completionTimeMs ?? 0);
+          saveDailyResult(dailyScore);
+          return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats, runStartAt: null, finalTimeMs, newPersonalBest: false, dailyScore };
+        }
         recordGame(false, state.difficulty!, correctCount, wrongCount, langStats);
       }
 
@@ -130,6 +168,28 @@ function reducer(state: GameState, action: Action): GameState {
         runStartAt: phase === 'won' || phase === 'final-loss-revealed' ? null : state.runStartAt,
         finalTimeMs,
         newPersonalBest,
+      };
+    }
+    case 'START_DAILY': {
+      const challenge = generateDailyChallenge();
+      const round = challenge.rounds[0];
+      const lang = getLanguageById(round.langId)!;
+      const sentence = lang.sentences[round.sentenceIndex];
+      const options = [...round.distractorIds, round.langId].sort(() => Math.random() - 0.5);
+
+      return {
+        ...initialState,
+        phase: 'playing',
+        difficulty: 'medium' as DifficultyKey,
+        cfg: { tiers: DAILY_CONFIG.tiers, winTarget: DAILY_CONFIG.roundCount, wrongLimit: DAILY_CONFIG.wrongLimit, optionCount: DAILY_CONFIG.optionCount, inputType: 'buttons', showHint: false, recencyPenaltyRounds: 0 },
+        currentLangId: round.langId,
+        currentSentence: sentence,
+        options,
+        hint: '',
+        runStartAt: Date.now(),
+        isDaily: true,
+        dailyChallenge: challenge,
+        dailyRoundIndex: 0,
       };
     }
     case 'QUIT':

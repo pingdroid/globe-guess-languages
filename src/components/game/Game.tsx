@@ -7,6 +7,7 @@ import { useUser } from '../../stores/user-store';
 import { StartScreen } from './StartScreen';
 import { PlayScreen } from './PlayScreen';
 import { EndScreen } from './EndScreen';
+import { DailyChallengeResult } from './DailyChallengeResult';
 
 function StatsBar() {
   const { state } = useGame();
@@ -45,7 +46,7 @@ function Header() {
 }
 
 function GameRouter() {
-  const { state } = useGame();
+  const { state, dispatch } = useGame();
 
   switch (state.phase) {
     case 'menu':
@@ -56,6 +57,13 @@ function GameRouter() {
       return <PlayScreen />;
     case 'won':
     case 'lost':
+      if (state.isDaily && state.dailyScore) {
+        return <DailyChallengeResult
+          score={state.dailyScore}
+          onPlayAgain={() => dispatch({ type: 'START_DAILY' })}
+          onMenu={() => dispatch({ type: 'QUIT' })}
+        />;
+      }
       return <EndScreen />;
   }
 }

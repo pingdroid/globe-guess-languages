@@ -324,3 +324,77 @@
   .profile-anchor { top: 1rem; right: 1rem; }
   .profile-pill-email { max-width: 100px; }
 }
+
+/* ── Daily Challenge Card ── */
+.daily-challenge-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #e94560;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.daily-challenge-card:hover {
+  transform: translateY(-2px);
+  border-color: #ff6b6b;
+}
+.daily-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.daily-icon {
+  font-size: 1.8rem;
+}
+.daily-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.daily-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+.daily-streak {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: #ff9830;
+  font-weight: 600;
+}
+.daily-result-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #333;
+}
+.daily-score {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #73bf69;
+}
+.daily-time {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+.daily-replay {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #5794f2;
+}
+.daily-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #333;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+.daily-play-btn {
+  color: #e94560;
+  font-weight: 600;
+}

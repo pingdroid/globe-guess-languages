@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGame, useStats } from '../../stores/game-store';
 import { formatElapsedTime, type DifficultyKey } from '../../engine/game-engine';
 import { HighScoresModal } from './HighScoresModal';
+import { DailyChallengeCard } from './DailyChallengeCard';
 
 const diffOptions: Array<{ key: DifficultyKey; icon: string; title: string; tag: string; desc: string }> = [
   { key: 'easy', icon: '🌱', title: 'Easy', tag: '5 to win · 3 lives', desc: 'Multiple choice. Common languages. Regional hints on.' },
@@ -19,6 +20,8 @@ export function StartScreen() {
 
   return (
     <div className="start-screen">
+      <DailyChallengeCard onPlay={() => dispatch({ type: 'START_DAILY' })} />
+
       <div className="start-intro">
         <h2>Pick a challenge</h2>
         <p>Read a snippet, identify the language. Earn streaks, master tongues, climb tiers.</p>
