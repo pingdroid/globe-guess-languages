@@ -1,5 +1,6 @@
 import { GameProvider, useGame, useStats } from '../../stores/game-store';
 import { getDerivedStats, loadStats } from '../../engine/game-engine';
+import { loadDailyState } from '../../engine/daily-challenge';
 import AuthModal from '../auth/AuthModal';
 import ProfileMenu from '../auth/ProfileMenu';
 import { useState, useEffect } from 'react';
@@ -12,10 +13,12 @@ import { DailyChallengeResult } from './DailyChallengeResult';
 function StatsBar() {
   const { state } = useGame();
   const [stats, setStats] = useState(getDerivedStats(loadStats()));
+  const [dailyStreak, setDailyStreak] = useState(loadDailyState().streak);
 
   // Re-read stats when phase changes (after game ends and stats are written)
   useEffect(() => {
     setStats(getDerivedStats(loadStats()));
+    setDailyStreak(loadDailyState().streak);
   }, [state.phase]);
 
   return (
@@ -23,8 +26,7 @@ function StatsBar() {
       <div className="stat-item"><span className="stat-val">{stats.games}</span><span className="stat-label">Games</span></div>
       <div className="stat-item"><span className="stat-val">{stats.wins}</span><span className="stat-label">Wins</span></div>
       <div className="stat-item"><span className="stat-val">{stats.accuracy}%</span><span className="stat-label">Accuracy</span></div>
-      <div className="stat-item"><span className="stat-val streak-val">{stats.currentStreak}</span><span className="stat-label">Streak</span></div>
-      <div className="stat-item"><span className="stat-val master-val">{stats.mastered}</span><span className="stat-label">Mastered</span></div>
+      <div className="stat-item"><span className="stat-val streak-val">{dailyStreak}</span><span className="stat-label">Daily Streak</span></div>
     </div>
   );
 }
