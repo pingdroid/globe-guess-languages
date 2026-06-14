@@ -31,7 +31,7 @@ interface GameState {
 
 type Action =
   | { type: 'START_GAME'; difficulty: DifficultyKey }
-  | { type: 'START_DAILY' }
+  | { type: 'START_DAILY'; date?: string }
   | { type: 'NEXT_ROUND' }
   | { type: 'GUESS'; guessValue: string; inputMode: 'buttons' | 'text' }
   | { type: 'LOSS_TIMEOUT' }
@@ -171,7 +171,7 @@ function reducer(state: GameState, action: Action): GameState {
       };
     }
     case 'START_DAILY': {
-      const challenge = generateDailyChallenge();
+      const challenge = generateDailyChallenge(action.date);
       const round = challenge.rounds[0];
       const lang = getLanguageById(round.langId)!;
       const sentence = lang.sentences[round.sentenceIndex];

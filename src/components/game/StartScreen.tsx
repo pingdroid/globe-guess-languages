@@ -3,6 +3,7 @@ import { useGame, useStats } from '../../stores/game-store';
 import { formatElapsedTime, type DifficultyKey } from '../../engine/game-engine';
 import { HighScoresModal } from './HighScoresModal';
 import { DailyChallengeCard } from './DailyChallengeCard';
+import { DailyChallengeCalendar } from './DailyChallengeCalendar';
 
 const diffOptions: Array<{ key: DifficultyKey; icon: string; title: string; tag: string; desc: string }> = [
   { key: 'easy', icon: '🌱', title: 'Easy', tag: '5 to win · 3 lives', desc: 'Multiple choice. Common languages. Regional hints on.' },
@@ -17,10 +18,11 @@ export function StartScreen() {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showHighScores, setShowHighScores] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   return (
     <div className="start-screen">
-      <DailyChallengeCard onPlay={() => dispatch({ type: 'START_DAILY' })} />
+      <DailyChallengeCard onPlay={() => dispatch({ type: 'START_DAILY' })} onArchive={() => setShowCalendar(true)} />
 
       <div className="start-intro">
         <h2>Pick a challenge</h2>
@@ -63,6 +65,11 @@ export function StartScreen() {
       <button type="button" className="how-to-play-link" onClick={() => setShowPrivacy(true)}>
         Privacy policy
       </button>
+
+      {showCalendar && <DailyChallengeCalendar
+        onSelectDate={(date) => { setShowCalendar(false); dispatch({ type: 'START_DAILY', date }); }}
+        onClose={() => setShowCalendar(false)}
+      />}
 
       {showHighScores && <HighScoresModal stats={stats} onClose={() => setShowHighScores(false)} />}
 

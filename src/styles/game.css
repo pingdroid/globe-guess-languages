@@ -398,3 +398,50 @@
   color: #e94560;
   font-weight: 600;
 }
+
+/* ── Daily Challenge Calendar ── */
+.daily-calendar-modal { max-width: 380px; }
+.daily-calendar-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+.daily-calendar-subtitle { font-size: 0.8rem; color: #888; margin-bottom: 16px; }
+.daily-archive-link {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #5794f2;
+  cursor: pointer;
+}
+.daily-archive-link:hover { text-decoration: underline; }
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.cal-nav-btn { background: none; border: none; color: #fff; font-size: 1.1rem; cursor: pointer; padding: 4px 8px; }
+.cal-nav-btn:disabled { opacity: 0.3; cursor: default; }
+.cal-month-label { font-weight: 600; font-size: 0.95rem; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-header-cell { text-align: center; font-size: 0.7rem; color: #666; padding: 4px 0; }
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+}
+.cal-cell.empty { cursor: default; }
+.cal-cell.future { opacity: 0.2; cursor: default; }
+.cal-cell.unavailable { opacity: 0.15; cursor: default; }
+.cal-cell.available { background: #1a2a3a; }
+.cal-cell.available:hover { background: #2a3a4a; }
+.cal-cell.today { background: #1a2a3a; border: 2px solid #e94560; }
+.cal-cell.completed { background: #1a3a2a; }
+.cal-cell.completed:hover { background: #2a4a3a; }
+.cal-day-num { font-weight: 600; }
+.cal-day-score { font-size: 0.6rem; color: #73bf69; }
+.cal-day-badge { color: #e94560; font-size: 0.5rem; position: absolute; bottom: 2px; }
+.cal-legend { display: flex; gap: 12px; margin-top: 12px; font-size: 0.7rem; color: #888; }
+.cal-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+.cal-dot.completed { background: #1a3a2a; border: 1px solid #73bf69; }
+.cal-dot.today { background: #1a2a3a; border: 1px solid #e94560; }
+.cal-dot.available { background: #1a2a3a; border: 1px solid #444; }

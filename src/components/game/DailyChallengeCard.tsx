@@ -2,9 +2,10 @@ import { loadDailyState, getTodayDateStr, DAILY_CONFIG } from '../../engine/dail
 
 interface Props {
   onPlay: () => void;
+  onArchive: () => void;
 }
 
-export function DailyChallengeCard({ onPlay }: Props) {
+export function DailyChallengeCard({ onPlay, onArchive }: Props) {
   const state = loadDailyState();
   const today = getTodayDateStr();
   const completed = state.date === today && state.completed;
@@ -39,6 +40,9 @@ export function DailyChallengeCard({ onPlay }: Props) {
           <span className="daily-play-btn">Play →</span>
         </div>
       )}
+      <div className="daily-archive-link" onClick={(e) => { e.stopPropagation(); onArchive(); }}>
+        📆 View past challenges
+      </div>
     </div>
   );
 }
