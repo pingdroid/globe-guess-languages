@@ -101,7 +101,13 @@ function reducer(state: GameState, action: Action): GameState {
     case 'NEXT_ROUND': {
       if (state.isDaily && state.dailyChallenge) {
         const nextIdx = state.dailyRoundIndex + 1;
-        if (nextIdx >= state.dailyChallenge.rounds.length) return state;
+        if (nextIdx >= state.dailyChallenge.rounds.length) {
+          // All rounds done — end game
+          const completionTimeMs = state.runStartAt ? Date.now() - state.runStartAt : 0;
+          const ds = computeDailyScore(state.correctCount, state.wrongCount, completionTimeMs);
+          saveDailyResult(ds);
+          return { ...state, phase: 'won' as Phase, runStartAt: null, finalTimeMs: completionTimeMs, dailyScore: ds };
+        }
         const round = state.dailyChallenge.rounds[nextIdx];
         const lang = getLanguageById(round.langId)!;
         const sentence = lang.sentences[round.sentenceIndex];
