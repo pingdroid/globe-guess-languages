@@ -113,7 +113,7 @@ function reducer(state: GameState, action: Action): GameState {
           // All rounds done — end game
           const completionTimeMs = state.runStartAt ? Date.now() - state.runStartAt : 0;
           const ds = computeDailyScore(state.correctCount, state.wrongCount, completionTimeMs);
-          saveDailyResult(ds);
+          if (!state.challengeId) saveDailyResult(ds);
           return { ...state, phase: 'won' as Phase, runStartAt: null, finalTimeMs: completionTimeMs, dailyScore: ds };
         }
         const round = state.dailyChallenge.rounds[nextIdx];
@@ -154,9 +154,13 @@ function reducer(state: GameState, action: Action): GameState {
       if (correctCount >= cfg.winTarget) {
         phase = 'won';
         finalTimeMs = completionTimeMs ?? null;
-        if (state.isDaily) {
+        if (state.isDaily && !state.challengeId) {
           const dailyScore = computeDailyScore(correctCount, wrongCount, completionTimeMs ?? 0);
           saveDailyResult(dailyScore);
+          return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats, runStartAt: null, finalTimeMs, newPersonalBest: false, dailyScore };
+        }
+        if (state.challengeId) {
+          const dailyScore = computeDailyScore(correctCount, wrongCount, completionTimeMs ?? 0);
           return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats, runStartAt: null, finalTimeMs, newPersonalBest: false, dailyScore };
         }
         const result = recordGame(true, state.difficulty!, correctCount, wrongCount, langStats, completionTimeMs);
@@ -164,9 +168,13 @@ function reducer(state: GameState, action: Action): GameState {
       } else if (wrongCount >= cfg.wrongLimit) {
         phase = 'final-loss-revealed';
         finalTimeMs = completionTimeMs ?? null;
-        if (state.isDaily) {
+        if (state.isDaily && !state.challengeId) {
           const dailyScore = computeDailyScore(correctCount, wrongCount, completionTimeMs ?? 0);
           saveDailyResult(dailyScore);
+          return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats, runStartAt: null, finalTimeMs, newPersonalBest: false, dailyScore };
+        }
+        if (state.challengeId) {
+          const dailyScore = computeDailyScore(correctCount, wrongCount, completionTimeMs ?? 0);
           return { ...state, phase, correctCount, wrongCount, lastGuessCorrect: isCorrect, langStats, runStartAt: null, finalTimeMs, newPersonalBest: false, dailyScore };
         }
         recordGame(false, state.difficulty!, correctCount, wrongCount, langStats);
